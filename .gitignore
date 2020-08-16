@@ -1,0 +1,14 @@
+## ide
+**/.idea
+*.iml
+
+## backend
+**/target
+**/logs
+
+## front
+**/*.lock
+
+
+## my
+**/node_modules
