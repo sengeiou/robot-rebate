@@ -1,10 +1,12 @@
 package org.jeecg.modules.robot.entity;
 
+import lombok.ToString;
 import org.jeecg.modules.robot.handler.WecharHandler;
 
 /**
  * 发送文字消息(好友或者群)
  */
+@ToString
 public class SendTextMsg extends SendMsgAbstract {
     private String msg;
     public SendTextMsg(String msg){

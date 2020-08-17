@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class WechatReceive implements Serializable {
+public class WxReceive implements Serializable {
 
     private String type;	// 如：100
     private String msg_type;	// 如：1
