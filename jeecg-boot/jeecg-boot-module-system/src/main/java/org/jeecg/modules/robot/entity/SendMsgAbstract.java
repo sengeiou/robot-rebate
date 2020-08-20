@@ -8,7 +8,7 @@ import org.jeecg.modules.robot.handler.WecharHandler;
 @Getter
 public abstract class SendMsgAbstract {
     // 忽略，在v2.3及以上启用了key验证才需要配这个;如:4612AA169B274a7e906740377F0DC423
-    private String key = WecharHandler.KEY;
+    private final String key = WecharHandler.KEY;
 
     // 发消息的机器账号id，默认是收到消息的这个号，如登录了两个号，也可以用其他的号发出;如:csp961096506
     private String robot_wxid;

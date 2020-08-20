@@ -1,6 +1,5 @@
 package org.jeecg.modules.robot.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.modules.robot.entity.SendMsgAbstract;
 import org.jeecg.modules.robot.entity.WxReceive;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Iterator;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -23,11 +20,7 @@ public class RobotController {
 	@ResponseBody
 	@PostMapping("/reply")
 	public void reply(HttpServletRequest req) throws Exception{
-		WxReceive msg = toObject(req, WxReceive.class);
-		if (null != msg.getMsg()) {
-			msg.setMsg(WecharHandler.decodeMsg(msg.getMsg()));
-		}
-		log.info("得到微信信息:{}", msg);
+		WxReceive msg = WxReceive.instance(req);
 
 		// 保存、查询 对应的机器人、用户信息
 
@@ -68,19 +61,6 @@ public class RobotController {
 	}
 
 
-	private <T> T toObject(HttpServletRequest request, Class<T> beanClass) {
-		Map parameterMap = request.getParameterMap();
-		log.info("!!!接收微信信息为:{}", parameterMap);
-		JSONObject json = new JSONObject();
-		Iterator paIter = parameterMap.keySet().iterator();
-		while (paIter.hasNext()) {
-			String key = paIter.next().toString();
-			String[] values = (String[]) parameterMap.get(key);
-			json.put(key, values[0]);
-		}
-		T obj = JSONObject.toJavaObject(json, beanClass);
-		log.info("!!!转化微信信息为:{}", obj);
-		return obj;
-	}
+
 
 }

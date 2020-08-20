@@ -97,7 +97,6 @@ public class WecharHandler {
         WxResult.throwInvalid(responseEntity);
 
         WxResult msg = responseEntity.getBody();
-        log.info("获取机器人账号列表结果1：{}", msg);
         List<WxFriend> friendList = msg.getObjList(WxFriend.class);
         log.info("获取机器人账号列表结果：{}", msg);
         return friendList;
