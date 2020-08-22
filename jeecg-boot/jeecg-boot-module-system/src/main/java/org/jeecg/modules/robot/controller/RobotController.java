@@ -37,7 +37,7 @@ public class RobotController {
 		// 保存、查询 对应的机器人、用户信息
 		WechatRobot robot = wxRobotService.register(msg.getRobot_wxid());
 		req.setAttribute(WechatConstants.ROBOT, robot);
-		WechatUser user = wxUserService.register(msg.getRobot_wxid(), msg.getFrom_wxid(), msg.getFrom_name());
+		WechatUser user = wxUserService.register(msg.getRobot_wxid(), msg.getFrom_wxid());
 		req.setAttribute(WechatConstants.USER, user);
 
 

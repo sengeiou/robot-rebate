@@ -39,10 +39,9 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
     private WecharHandler wecharHandler;
 
     @Override
-    public WechatUser register(String robotWxid, String wxid, String nickName) {
+    public WechatUser register(String robotWxid, String wxid) {
         Objects.requireNonNull(robotWxid, "！！！机器人微信ID不能为空");
         Objects.requireNonNull(wxid, "！！！微信用户ID不能为空");
-        Objects.requireNonNull(nickName, "！！！微信用户昵称不能为空");
 
         // 一、判断redis中是否有微信用户信息
         String key = String.format(WechatConstants.USER_REDIS_FORMAT, robotWxid, wxid);

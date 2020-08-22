@@ -37,12 +37,12 @@ public class WxReceive implements Serializable {
             String[] values = (String[]) parameterMap.get(key);
             json.put(key, values[0]);
         }
-        log.info("！！！传入微信消息:{}", json.toJSONString());
+        log.info("传入微信消息:{}", json.toJSONString());
         WxReceive msg = JSONObject.toJavaObject(json, WxReceive.class);
         if (null != msg && null != msg.getMsg()) {
             msg.setMsg(WecharHandler.decodeMsg(msg.getMsg()));
         }
-        log.info("！！！微信消息转为对象:{}", msg);
+        log.info("微信消息转为对象:{}", msg);
         return msg;
     }
 }

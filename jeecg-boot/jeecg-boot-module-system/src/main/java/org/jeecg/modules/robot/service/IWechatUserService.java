@@ -11,5 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWechatUserService extends IService<WechatUser> {
 
-    WechatUser register(String robotWxid, String wxid, String nickName);
+    WechatUser register(String robotWxid, String wxid);
 }

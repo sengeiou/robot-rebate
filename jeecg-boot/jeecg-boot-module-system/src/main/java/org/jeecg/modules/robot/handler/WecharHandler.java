@@ -107,8 +107,8 @@ public class WecharHandler {
      * 同意好友请求
      */
     public void agreeFriendVerify(String robotWxid, String msg) {
-        Objects.requireNonNull(robotWxid);
-        Objects.requireNonNull(msg);
+        Objects.requireNonNull(robotWxid, "!!!微信机器人ID不能为空");
+        Objects.requireNonNull(msg, "!!!微信用户ID不能为空");
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         Map<String,String> obj = new HashMap<String,String>();
