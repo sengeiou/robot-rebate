@@ -50,7 +50,7 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
 
         // redis中有 ==>直接返回
         if (null != user) {
-            log.info("从Redis缓存中获取微信用户【{}】信息:{}", wxid, user);
+            log.info("从Redis缓存中获取微信用户【{},{}】信息:{}", robotWxid, wxid, user);
             return user;
         }
 
@@ -67,11 +67,11 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
             long hours = ChronoUnit.HOURS.between(syncTime, LocalDateTime.now());
             boolean noOverTime = (hours < WechatConstants.USER_SYNC_TIME);
             if (noOverTime) {
-                log.info("从db中获取微信用户【{}】信息:{}", wxid, user);
+                log.info("从db中获取微信用户【{},{}】信息:{}", robotWxid, wxid, user);
                 redisUtil.set(key, user, WechatConstants.USER_REDIS_TIME);
                 return user;
             }
-            log.info("微信用户【{}】信息需要重新同步:{}", wxid, user);
+            log.info("微信用户【{},{}】信息需要重新同步:{}", robotWxid, wxid, user);
         }
 
         //三、db中没有 ==>判断微信api中是否有微信用户信息
@@ -80,7 +80,7 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
 
         // 微信api中没有 ==> 报出异常
         if (null == wxFriend) {
-            log.error("！！！微信用户【{}】不存在信息", wxid);
+            log.error("！！！微信用户【{},{}】不存在信息", robotWxid, wxid);
             throw new RuntimeException("！！！微信用户不存在");
         }
 
@@ -88,7 +88,7 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
         WechatUser newUser = buildWechatUser(user, wxFriend);
         saveOrUpdate(newUser);
         redisUtil.set(key, newUser, WechatConstants.USER_REDIS_TIME);
-        log.info("从微信api中获取微信用户【{}】信息:{}", wxid, user);
+        log.info("从微信api中获取微信用户【{},{}】信息:{}", robotWxid, wxid, user);
         return newUser;
     }
 
