@@ -7,6 +7,7 @@ import org.jeecg.modules.robot.handler.WecharHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,18 +25,18 @@ public class WxResult {
         }
         data = WecharHandler.decodeMsg(data.trim());
         if (clazz == null) {
-            throw new IllegalArgumentException("WechatResult.getObj 对应的类不能为空");
+            throw new IllegalArgumentException("！！！WechatResult.getObj 对应的类不能为空");
         }
         return JSON.parseObject(data, clazz);
     }
 
     public <T> List<T> getObjList(Class<T> clazz){
         if (null == data || data.trim().isEmpty()) {
-            return null;
+            return new ArrayList<T>(); // 注意，返回空list
         }
         data = WecharHandler.decodeMsg(data.trim());
         if (clazz == null) {
-            throw new IllegalArgumentException("WechatResult.getObjList 对应的类不能为空");
+            throw new IllegalArgumentException("！！！WechatResult.getObjList 对应的类不能为空");
         }
         return JSON.parseArray(data, clazz);
     }
@@ -45,11 +46,11 @@ public class WxResult {
      */
     public static void throwInvalid(ResponseEntity<WxResult> responseEntity){
         if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {
-            throw new RuntimeException("调用微信API异常!");
+            throw new RuntimeException("！！！调用微信API异常!");
         }
         WxResult msg = responseEntity.getBody();
         if (0 != msg.getCode()) {
-            throw new RuntimeException("调用微信API失败!");
+            throw new RuntimeException("！！！调用微信API失败!");
         }
     }
 

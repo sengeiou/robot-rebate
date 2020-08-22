@@ -159,6 +159,11 @@
             align:"center",
             dataIndex: 'signature'
            },
+		   {
+            title: '同步时间(和系统时间一致)',
+            align:"center",
+            dataIndex: 'syncTime'
+           },
           {
             title: '操作',
             dataIndex: 'action',

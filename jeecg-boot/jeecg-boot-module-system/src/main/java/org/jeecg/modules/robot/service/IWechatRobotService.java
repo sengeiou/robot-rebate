@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWechatRobotService extends IService<WechatRobot> {
 
+    WechatRobot register(String robotWxid);
 }

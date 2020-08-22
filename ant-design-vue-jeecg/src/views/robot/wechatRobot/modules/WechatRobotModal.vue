@@ -42,6 +42,12 @@
           label="个性说明">
           <a-input placeholder="请输入个性说明" v-decorator="['signature', {}]" />
         </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="同步时间(和系统时间一致)">
+          <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'syncTime', {}]" />
+        </a-form-item>
 		
       </a-form>
     </a-spin>
@@ -93,6 +99,7 @@
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model,'wxid','nickname','headUrl','backgroundUrl','signature'))
 		  //时间格式化
+          this.form.setFieldsValue({syncTime:this.model.syncTime?moment(this.model.syncTime):null})
         });
 
       },
@@ -117,6 +124,7 @@
             }
             let formData = Object.assign(this.model, values);
             //时间格式化
+            formData.syncTime = formData.syncTime?formData.syncTime.format('YYYY-MM-DD HH:mm:ss'):null;
             
             console.log(formData)
             httpAction(httpurl,formData,method).then((res)=>{

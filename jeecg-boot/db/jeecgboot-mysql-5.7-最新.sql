@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-08-22 15:31:52
+Date: 2020-08-22 23:41:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1675,7 +1675,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1598081382632', '1598081507692', '10000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1598110747814', '1598110822145', '10000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -3817,6 +3817,9 @@ INSERT INTO `sys_log` VALUES ('1297073730796388354', '2', '机器人-通过id删
 INSERT INTO `sys_log` VALUES ('1297073731660414978', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@32e78bd6', null, '14', 'admin', '2020-08-22 15:30:51', null, null);
 INSERT INTO `sys_log` VALUES ('1297073746755715073', '2', '机器人-批量删除', '4', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.deleteBatch()', null, '  ids: 1297073629818519554,', null, '27', 'admin', '2020-08-22 15:30:54', null, null);
 INSERT INTO `sys_log` VALUES ('1297073747154173953', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@35eef238', null, '6', 'admin', '2020-08-22 15:30:54', null, null);
+INSERT INTO `sys_log` VALUES ('1297074738184323074', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@71f496f8', null, '15', 'admin', '2020-08-22 15:34:51', null, null);
+INSERT INTO `sys_log` VALUES ('1297074743985045505', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@1b3224e3', null, '6', 'admin', '2020-08-22 15:34:52', null, null);
+INSERT INTO `sys_log` VALUES ('1297074864458039298', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@721ab97c', null, '8', 'admin', '2020-08-22 15:35:21', null, null);
 
 -- ----------------------------
 -- Table structure for `sys_permission`
@@ -4932,6 +4935,7 @@ CREATE TABLE `wechat_robot` (
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建者',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '修改者',
+  `sync_time` datetime NOT NULL COMMENT '同步时间(和系统时间一致)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_wechat_robot_wxid` (`wxid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='机器人';
@@ -4939,6 +4943,7 @@ CREATE TABLE `wechat_robot` (
 -- ----------------------------
 -- Records of wechat_robot
 -- ----------------------------
+INSERT INTO `wechat_robot` VALUES ('1297194630611144706', 'csp961096506', 'Simple.Chen', 'http://wx.qlogo.cn/mmhead/ver_1/I31pBs2r5nKHibJSktYHVhwbtK7hOCTGtEkmvoynmzZJ8loHXx6Nicgm8DGp5UylicyXA4VGFFAIfhFRJFv6qjO0w/132', 'http://szmmsns.qpic.cn/mmsns/zba019qazGp2XMEcUgtYyPCJLmV3CIy530ekibEupe5vDSCxekqEIWnEn3qictq4NVkmUgAKwhqHo/0', '未来', '2020-08-22 23:31:15', null, null, null, '2020-08-22 23:31:15');
 
 -- ----------------------------
 -- Table structure for `wechat_user`
@@ -4960,6 +4965,7 @@ CREATE TABLE `wechat_user` (
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建者',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '修改者',
+  `sync_time` datetime NOT NULL COMMENT '同步时间(和系统时间一致)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_wechat_user_key` (`wxid`,`robot_wxid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信用户';
@@ -4967,3 +4973,4 @@ CREATE TABLE `wechat_user` (
 -- ----------------------------
 -- Records of wechat_user
 -- ----------------------------
+INSERT INTO `wechat_user` VALUES ('1297194635883384834', 'wxid_g3xnklexyaj722', 'csp961096506', '0', '1', '小妮子saly', '微小小', '0', null, null, null, '2020-08-22 23:31:17', null, '2020-08-22 23:32:39', null, '2020-08-22 23:32:39');

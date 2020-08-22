@@ -184,6 +184,11 @@
             align:"center",
             dataIndex: 'regMessage'
            },
+		   {
+            title: '同步时间',
+            align:"center",
+            dataIndex: 'syncTime'
+           },
           {
             title: '操作',
             dataIndex: 'action',

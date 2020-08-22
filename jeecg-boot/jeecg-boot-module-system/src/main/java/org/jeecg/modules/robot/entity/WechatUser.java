@@ -92,4 +92,10 @@ public class WechatUser {
 	@Excel(name = "修改者", width = 15)
     @ApiModelProperty(value = "修改者")
 	private java.lang.String updateBy;
+	/**同步时间*/
+	@Excel(name = "同步时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "同步时间")
+	private java.util.Date syncTime;
 }
