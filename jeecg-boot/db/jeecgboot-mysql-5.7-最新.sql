@@ -4921,6 +4921,45 @@ INSERT INTO `test_shoptype_tree` VALUES ('1256629139206680578', 'admin', '2020-0
 INSERT INTO `test_shoptype_tree` VALUES ('1256629188993069058', 'admin', '2020-05-03 00:58:40', 'admin', '2020-05-03 00:58:55', 'A01', '华为手机', 'jeewxshop测试号_1588438719823.jpg', '1256629093740425218', '0');
 
 -- ----------------------------
+-- Table structure for `wechat_reply_config`
+-- ----------------------------
+DROP TABLE IF EXISTS `wechat_reply_config`;
+CREATE TABLE `wechat_reply_config` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `bean` varchar(100) NOT NULL COMMENT '业务处理bean',
+  `params` varchar(4000) DEFAULT NULL COMMENT '配置参数，json格式',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='回复配置表';
+
+-- ----------------------------
+-- Records of wechat_reply_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wechat_reply_matche`
+-- ----------------------------
+DROP TABLE IF EXISTS `wechat_reply_matche`;
+CREATE TABLE `wechat_reply_matche` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `content` varchar(100) NOT NULL COMMENT '匹配内容',
+  `type` tinyint(3) NOT NULL COMMENT '匹配事件==>100:私聊消息；200:群聊消息；300:暂无；400:群成员增加；410:群成员减少；500:收到好友请求；600:二维码收款；700:收到转账；800:软件开始启动；900:新的账号登录完成；910:账号下线；',
+  `config_id` varchar(32) DEFAULT NULL COMMENT '回复配置ID',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='回复匹配表';
+
+-- ----------------------------
+-- Records of wechat_reply_matche
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `wechat_robot`
 -- ----------------------------
 DROP TABLE IF EXISTS `wechat_robot`;
