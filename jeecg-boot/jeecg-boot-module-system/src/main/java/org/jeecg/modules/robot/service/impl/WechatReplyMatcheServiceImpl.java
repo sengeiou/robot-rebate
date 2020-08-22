@@ -39,7 +39,7 @@ public class WechatReplyMatcheServiceImpl extends ServiceImpl<WechatReplyMatcheM
 
             //匹配失败
             if (!matcher(type.toString(), msg.getMsg_type()) || !matcher(content, msg.getMsg())) {
-                break;
+                continue;
             }
 
             //匹配成功
