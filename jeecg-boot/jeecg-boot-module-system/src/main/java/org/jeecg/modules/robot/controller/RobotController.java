@@ -17,12 +17,17 @@ public class RobotController {
 	@Autowired
 	private WecharHandler wecharHandler;
 
+
+
 	@ResponseBody
-	@PostMapping("/reply")
-	public void reply(HttpServletRequest req) throws Exception{
+	@PostMapping("/channel")
+	public void channel(HttpServletRequest req) throws Exception{
+		// 接收微信信息转为java对象
 		WxReceive msg = WxReceive.instance(req);
 
 		// 保存、查询 对应的机器人、用户信息
+
+
 
 		// 业务处理过程(机器人,用户信息,WechatReceive)
 		// 业务返回 sendInfo
