@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-08-22 13:43:10
+Date: 2020-08-22 15:31:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1675,7 +1675,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1598074436306', '1598074652117', '10000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1598081382632', '1598081507692', '10000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -3807,6 +3807,16 @@ INSERT INTO `sys_log` VALUES ('1297045197307109377', '2', '机器人-分页列�
 INSERT INTO `sys_log` VALUES ('1297045220103151618', '2', '机器人-批量删除', '4', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.deleteBatch()', null, '  ids: 2,4,1,3,', null, '23', 'admin', '2020-08-22 13:37:33', null, null);
 INSERT INTO `sys_log` VALUES ('1297045220577107969', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@59109c22', null, '6', 'admin', '2020-08-22 13:37:33', null, null);
 INSERT INTO `sys_log` VALUES ('1297045232195330050', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@67a70c36', null, '3', 'admin', '2020-08-22 13:37:36', null, null);
+INSERT INTO `sys_log` VALUES ('1297073584998187009', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-08-22 15:30:16', null, null);
+INSERT INTO `sys_log` VALUES ('1297073606183616513', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@611bcd90', null, '82', 'admin', '2020-08-22 15:30:21', null, null);
+INSERT INTO `sys_log` VALUES ('1297073630363779074', '2', '机器人-添加', '2', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.add()', null, '[{\"backgroundUrl\":\"4\",\"createBy\":\"admin\",\"createTime\":1598081426467,\"headUrl\":\"3\",\"id\":\"1297073629818519554\",\"nickname\":\"2\",\"signature\":\"5\",\"wxid\":\"1\"}]', null, '23', 'admin', '2020-08-22 15:30:27', null, null);
+INSERT INTO `sys_log` VALUES ('1297073631060033538', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@6e5de68b', null, '31', 'admin', '2020-08-22 15:30:27', null, null);
+INSERT INTO `sys_log` VALUES ('1297073670994001921', '2', '机器人-添加', '2', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.add()', null, '[{\"backgroundUrl\":\"4\",\"createBy\":\"admin\",\"createTime\":1598081436257,\"headUrl\":\"3\",\"id\":\"1297073670876561410\",\"nickname\":\"2\",\"signature\":\"5\",\"wxid\":\"2\"}]', null, '23', 'admin', '2020-08-22 15:30:36', null, null);
+INSERT INTO `sys_log` VALUES ('1297073672239710210', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@16d0fb23', null, '25', 'admin', '2020-08-22 15:30:37', null, null);
+INSERT INTO `sys_log` VALUES ('1297073730796388354', '2', '机器人-通过id删除', '4', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.delete()', null, '  id: 1297073670876561410', null, '15', 'admin', '2020-08-22 15:30:51', null, null);
+INSERT INTO `sys_log` VALUES ('1297073731660414978', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@32e78bd6', null, '14', 'admin', '2020-08-22 15:30:51', null, null);
+INSERT INTO `sys_log` VALUES ('1297073746755715073', '2', '机器人-批量删除', '4', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.deleteBatch()', null, '  ids: 1297073629818519554,', null, '27', 'admin', '2020-08-22 15:30:54', null, null);
+INSERT INTO `sys_log` VALUES ('1297073747154173953', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@35eef238', null, '6', 'admin', '2020-08-22 15:30:54', null, null);
 
 -- ----------------------------
 -- Table structure for `sys_permission`
@@ -4912,6 +4922,7 @@ INSERT INTO `test_shoptype_tree` VALUES ('1256629188993069058', 'admin', '2020-0
 -- ----------------------------
 DROP TABLE IF EXISTS `wechat_robot`;
 CREATE TABLE `wechat_robot` (
+  `id` varchar(32) NOT NULL COMMENT '机器人ID',
   `wxid` varchar(50) NOT NULL COMMENT '微信机器人ID',
   `nickname` varchar(100) DEFAULT NULL COMMENT '机器人昵称',
   `head_url` varchar(300) DEFAULT NULL COMMENT '头像',
@@ -4921,7 +4932,8 @@ CREATE TABLE `wechat_robot` (
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建者',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '修改者',
-  PRIMARY KEY (`wxid`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_wechat_robot_wxid` (`wxid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='机器人';
 
 -- ----------------------------

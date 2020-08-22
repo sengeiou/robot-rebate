@@ -108,7 +108,7 @@
             that.confirmLoading = true;
             let httpurl = '';
             let method = '';
-            if(!this.model.wxid){
+            if(!this.model.id){
               httpurl+=this.url.add;
               method = 'post';
             }else{

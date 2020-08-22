@@ -1,21 +1,24 @@
 package org.jeecg.modules.robot.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.jeecgframework.poi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**
  * @Description: 机器人
  * @Author: jeecg-boot
- * @Date:   2020-08-21
+ * @Date:   2020-08-22
  * @Version: V1.0
  */
 @Data
@@ -25,8 +28,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @ApiModel(value="wechat_robot对象", description="机器人")
 public class WechatRobot {
     
-	/**微信机器人ID*/
+	/**机器人ID*/
 	@TableId(type = IdType.ID_WORKER_STR)
+    @ApiModelProperty(value = "机器人ID")
+	private java.lang.String id;
+	/**微信机器人ID*/
 	@Excel(name = "微信机器人ID", width = 15)
     @ApiModelProperty(value = "微信机器人ID")
 	private java.lang.String wxid;
