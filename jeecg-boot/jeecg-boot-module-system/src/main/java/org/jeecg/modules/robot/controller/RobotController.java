@@ -1,9 +1,14 @@
 package org.jeecg.modules.robot.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jeecg.modules.robot.constants.WechatConstants;
 import org.jeecg.modules.robot.entity.SendMsgAbstract;
+import org.jeecg.modules.robot.entity.WechatRobot;
+import org.jeecg.modules.robot.entity.WechatUser;
 import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.handler.WecharHandler;
+import org.jeecg.modules.robot.service.IWechatRobotService;
+import org.jeecg.modules.robot.service.IWechatUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +22,11 @@ public class RobotController {
 	@Autowired
 	private WecharHandler wecharHandler;
 
+	@Autowired
+	private IWechatRobotService wxRobotService;
 
+	@Autowired
+	private IWechatUserService wxUserService;
 
 	@ResponseBody
 	@PostMapping("/channel")
@@ -26,7 +35,10 @@ public class RobotController {
 		WxReceive msg = WxReceive.instance(req);
 
 		// 保存、查询 对应的机器人、用户信息
-
+		WechatRobot robot = wxRobotService.register(msg.getRobot_wxid());
+		req.setAttribute(WechatConstants.ROBOT, robot);
+		WechatUser user = wxUserService.register(msg.getRobot_wxid(), msg.getFrom_wxid(), msg.getFrom_name());
+		req.setAttribute(WechatConstants.USER, user);
 
 
 		// 业务处理过程(机器人,用户信息,WechatReceive)

@@ -71,6 +71,12 @@
           label="申请添加好友时发送的消息">
           <a-input placeholder="请输入申请添加好友时发送的消息" v-decorator="['regMessage', {}]" />
         </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="同步时间">
+          <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'syncTime', {}]" />
+        </a-form-item>
 		
       </a-form>
     </a-spin>
@@ -127,6 +133,7 @@
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model,'wxid','robotWxid','state','source','nickname','note','sex','headUrl','inviteWxid','regMessage'))
 		  //时间格式化
+          this.form.setFieldsValue({syncTime:this.model.syncTime?moment(this.model.syncTime):null})
         });
 
       },
@@ -151,6 +158,7 @@
             }
             let formData = Object.assign(this.model, values);
             //时间格式化
+            formData.syncTime = formData.syncTime?formData.syncTime.format('YYYY-MM-DD HH:mm:ss'):null;
             
             console.log(formData)
             httpAction(httpurl,formData,method).then((res)=>{

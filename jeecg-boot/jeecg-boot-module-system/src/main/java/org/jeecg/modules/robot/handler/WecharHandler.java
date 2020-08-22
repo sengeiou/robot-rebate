@@ -40,10 +40,10 @@ public class WecharHandler {
      */
     public void sendToWechar(SendMsgAbstract sendInfo){
         if(null == sendInfo){
-            log.info("！！！不发送给微信信息");
+            log.info("不发送给微信信息");
             return;
         }
-        log.info("！！！发送给微信信息:{}", sendInfo);
+        log.info("发送给微信信息:{}", sendInfo);
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         body.add("data", JSON.toJSONString(sendInfo));
 
@@ -51,7 +51,7 @@ public class WecharHandler {
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
 
         WxResult.throwInvalid(responseEntity);
-        log.info("！！！发送给微信信息成功：{}", responseEntity.getBody());
+        log.info("发送给微信信息成功：{}", responseEntity.getBody());
     }
 
 
@@ -98,7 +98,7 @@ public class WecharHandler {
 
         WxResult msg = responseEntity.getBody();
         List<WxFriend> friendList = msg.getObjList(WxFriend.class);
-        log.info("获取机器人账号列表结果：{}", msg);
+        log.info("获取获取好友列表结果：{}", msg);
         return friendList;
     }
 
