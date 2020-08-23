@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class WechatReplyMatcheServiceImpl extends ServiceImpl<WechatReplyMatcheMapper, WechatReplyMatche> implements IWechatReplyMatcheService {
 
-    @Cacheable(value = CacheConstant.TEST_DEMO_CACHE)
+    @Cacheable(cacheNames = CacheConstant.TEST_DEMO_CACHE, value = "WechatReplyMatcheServiceImpl.selectAll")
     public List<WechatReplyMatche> selectAll() {
         return this.list();
     }
