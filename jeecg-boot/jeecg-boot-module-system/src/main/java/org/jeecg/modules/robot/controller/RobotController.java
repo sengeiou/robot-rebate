@@ -1,12 +1,13 @@
 package org.jeecg.modules.robot.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jeecg.modules.robot.constants.WechatConstants;
-import org.jeecg.modules.robot.entity.*;
+import org.jeecg.modules.robot.entity.SendMsgAbstract;
+import org.jeecg.modules.robot.entity.WechatReplyMatche;
+import org.jeecg.modules.robot.entity.WxFilterResult;
+import org.jeecg.modules.robot.entity.WxReceive;
+import org.jeecg.modules.robot.handler.IWxFilterHandler;
 import org.jeecg.modules.robot.handler.WecharHandler;
 import org.jeecg.modules.robot.service.IWechatReplyMatcheService;
-import org.jeecg.modules.robot.service.IWechatRobotService;
-import org.jeecg.modules.robot.service.IWechatUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,10 @@ import java.util.List;
 public class RobotController {
 
 	@Autowired
+	private List<IWxFilterHandler> filterHandlers;
+
+	@Autowired
 	private WecharHandler wecharHandler;
-
-	@Autowired
-	private IWechatRobotService wxRobotService;
-
-	@Autowired
-	private IWechatUserService wxUserService;
 
 	@Autowired
 	private IWechatReplyMatcheService wechatReplyMatcheService;
@@ -37,11 +35,21 @@ public class RobotController {
 		//接收微信信息转为java对象
 		WxReceive msg = WxReceive.instance(req);
 
-		// 保存、查询 对应的机器人、用户信息
-		WechatRobot robot = wxRobotService.register(msg.getRobot_wxid());
-		req.setAttribute(WechatConstants.ROBOT, robot);
-		WechatUser user = wxUserService.register(msg.getRobot_wxid(), msg.getFrom_wxid());
-		req.setAttribute(WechatConstants.USER, user);
+		// 统一处理并过滤数据
+		for (IWxFilterHandler fh : filterHandlers) {
+			WxFilterResult result = fh.doFilter(req, msg);
+			if (null == result) {
+				continue;
+			}
+			// 如果有要提醒给用户信息，可以设置该对象
+			if (null != result.getSendMsg()) {
+				wecharHandler.sendToWechar(result.getSendMsg());
+			}
+			// 如果设置中断后续执行，则直接返回
+			if (result.isBreakOff()) {
+				return;
+			}
+		}
 
 		//获取回复匹配列表(缓存)
 		List<WechatReplyMatche> matcheList = wechatReplyMatcheService.selectAll();

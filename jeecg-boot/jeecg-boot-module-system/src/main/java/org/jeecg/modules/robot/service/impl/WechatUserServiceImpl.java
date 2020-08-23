@@ -54,10 +54,7 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
         }
 
         // 二、redis没有 ==>判断db中是否有微信用户信息
-        LambdaQueryWrapper<WechatUser> query = new LambdaQueryWrapper<>();
-        query.eq(WechatUser::getRobotWxid, robotWxid);
-        query.eq(WechatUser::getWxid, wxid);
-        user = getOne(query);
+        user = getUserByWxid(robotWxid, wxid);
 
         // db中有 ==>直接返回(并设置redis),如果同步时间未超过一定时间范围内的话
         if (null != user) {
@@ -90,6 +87,18 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
         log.info("从微信api中获取微信用户【{},{}】信息:{}", robotWxid, wxid, user);
         return newUser;
     }
+
+    @Override
+    public WechatUser getUserByWxid(String robotWxid, String wxid) {
+        Objects.requireNonNull(robotWxid, "！！！机器人微信ID不能为空");
+        Objects.requireNonNull(wxid, "！！！微信用户ID不能为空");
+
+        LambdaQueryWrapper<WechatUser> query = new LambdaQueryWrapper<>();
+        query.eq(WechatUser::getRobotWxid, robotWxid);
+        query.eq(WechatUser::getWxid, wxid);
+        return getOne(query);
+    }
+
 
     private WechatUser buildWechatUser(WechatUser user, WxFriend wxFriend) {
         Date now = new Date();

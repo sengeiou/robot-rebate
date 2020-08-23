@@ -1,15 +1,19 @@
 package org.jeecg.modules.robot.entity;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.jeecg.modules.robot.handler.WecharHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -44,5 +48,25 @@ public class WxReceive implements Serializable {
         }
         log.info("微信消息转为对象:{}", msg);
         return msg;
+    }
+
+    public <T> T getMsgObj(Class<T> clazz){
+        if (clazz == null) {
+            throw new IllegalArgumentException("！！！WxReceive.getMsgObj 对应的类不能为空");
+        }
+        if (StringUtils.isEmpty(msg)) {
+            return null;
+        }
+        return JSON.parseObject(msg, clazz);
+    }
+
+    public <T> List<T> getMsgObjList(Class<T> clazz){
+        if (clazz == null) {
+            throw new IllegalArgumentException("！！！WxReceive.getMsgObjList 对应的类不能为空");
+        }
+        if (StringUtils.isEmpty(msg)) {
+            return new ArrayList<T>(); // 注意，返回空list
+        }
+        return JSON.parseArray(msg, clazz);
     }
 }
