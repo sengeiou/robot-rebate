@@ -160,7 +160,7 @@
             dataIndex: 'signature'
            },
 		   {
-            title: '同步时间(和系统时间一致)',
+            title: '同步时间',
             align:"center",
             dataIndex: 'syncTime'
            },

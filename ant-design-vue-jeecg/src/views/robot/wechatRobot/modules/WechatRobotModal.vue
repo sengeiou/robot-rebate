@@ -45,7 +45,7 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="同步时间(和系统时间一致)">
+          label="同步时间">
           <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'syncTime', {}]" />
         </a-form-item>
 		
