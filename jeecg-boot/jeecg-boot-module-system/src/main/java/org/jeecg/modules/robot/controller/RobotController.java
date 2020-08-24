@@ -1,15 +1,11 @@
 package org.jeecg.modules.robot.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jeecg.modules.robot.entity.SendMsgAbstract;
-import org.jeecg.modules.robot.entity.WechatReplyMatche;
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.handler.IWxFilterHandler;
 import org.jeecg.modules.robot.handler.WecharHandler;
-import org.jeecg.modules.robot.service.IWechatReplyMatcheService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +22,6 @@ public class RobotController {
 	@Autowired
 	private WecharHandler wecharHandler;
 
-	@Autowired
-	private IWechatReplyMatcheService wechatReplyMatcheService;
 
 	@ResponseBody
 	@PostMapping("/channel")
@@ -51,29 +45,10 @@ public class RobotController {
 			}
 		}
 
-		//获取回复匹配列表(缓存)
-		List<WechatReplyMatche> matcheList = wechatReplyMatcheService.selectAll();
-		Assert.notEmpty(matcheList, "暂无回复匹配列表数据");
-
-		//获取匹配信息
-		WechatReplyMatche matche = wechatReplyMatcheService.getMatche(matcheList, msg);
-		Assert.notNull(matche, "未获取匹配信息");
-
-		// 业务处理过程(机器人,用户信息,WechatReceive)
-		// 业务返回 sendInfo
-		SendMsgAbstract sendInfo = null;
-		/*if("100".equals(msg.getType())){
-			sendInfo = new SendTextMsg("我的测试!");
-			sendInfo.setRobot_wxid(msg.getRobot_wxid());
-			sendInfo.setTo_wxid(msg.getFrom_wxid());
-		}*/
-
-		// 返回
-		wecharHandler.sendToWechar(sendInfo);
 	}
 
 
-	// 取好友列表
+	// 取好友列表 -- 测试
 	@ResponseBody
 	@GetMapping("/getInfo/{key}")
 	public Object getInfo(@PathVariable("key") String key, HttpServletRequest req) throws Exception {

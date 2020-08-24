@@ -26,4 +26,6 @@ public class WxUserAdd implements Serializable {
     private Integer sex;	// 如：2
     private String headimgurl;	// 如：http:\/\/wx.qlogo.cn\/mmhead\/ver_1\/AJ8UaNdeH52XBbfYL9dxjca4niczGicrrWCeL8ibDia4tPS565akKyapqXnibJx8HIFpUOCMXx3VDhvs1qdnrCrlqIrmrwR6Llq2jw1l0fBaL1js\/132
     private Integer type;	// 如：1
+    private String share_wxid; // 分享者微信id,如:linxw1219
+    private String share_nickname; // 如:安之若素
 }

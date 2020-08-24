@@ -180,7 +180,7 @@ jeecg :
     accessKeyId: ??
     accessKeySecret: ??
   shiro:
-    excludeUrls: /robot/channel,/test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**,/category/**,/visual/**,/map/**,/jmreport/bigscreen2/**
+    excludeUrls: /robot/channel,/robot/getInfo/**,/test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**,/category/**,/visual/**,/map/**,/jmreport/bigscreen2/**
   #阿里云oss存储配置
   oss:
     endpoint: oss-cn-beijing.aliyuncs.com

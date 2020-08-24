@@ -1,12 +1,10 @@
 package org.jeecg.modules.robot.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.modules.robot.entity.WechatReplyMatche;
 import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.mapper.WechatReplyMatcheMapper;
 import org.jeecg.modules.robot.service.IWechatReplyMatcheService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
@@ -23,7 +21,7 @@ import java.util.List;
 @Service
 public class WechatReplyMatcheServiceImpl extends ServiceImpl<WechatReplyMatcheMapper, WechatReplyMatche> implements IWechatReplyMatcheService {
 
-    @Cacheable(cacheNames = CacheConstant.TEST_DEMO_CACHE, value = "WechatReplyMatcheServiceImpl.selectAll")
+    //@Cacheable(cacheNames = CacheConstant.TEST_DEMO_CACHE, value = "WechatReplyMatcheServiceImpl.selectAll")
     public List<WechatReplyMatche> selectAll() {
         return this.list();
     }

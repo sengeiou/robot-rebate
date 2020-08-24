@@ -45,7 +45,7 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
 
         // 1、微信用户，存在==>判断是否拉黑用户
         // 拉黑用户，是==>直接不处理
-        if (WechatUserStateEnum.BLACK.getCode() == user.getState()) {
+        if (null != user && WechatUserStateEnum.BLACK.getCode() == user.getState()) {
             log.warn("!!!微信用户【{},{}】是拉黑用户，系统不自动添加", receive.getRobot_wxid(), receive.getFrom_wxid());
             return result;
         }
@@ -54,7 +54,9 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
         // 2、微信用户，不存在==>直接添加用户，并同意好友申请
         WechatUser newUser = buildWechatUser(user, receive);
         wxUserService.saveOrUpdate(newUser);
-        wecharHandler.agreeFriendVerify(receive.getRobot_wxid(), receive.getMsg());
+        String msg = receive.getMsg().replaceAll("\"", "\\\"").replaceAll("\\/","\\\\/");
+        log.info("--->content:{}", msg);
+        wecharHandler.agreeFriendVerify(receive.getRobot_wxid(), msg);
         return result;
     }
 
@@ -77,9 +79,8 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
         user.setSyncTime(now);
         // 如果是卡片分享，则设置他的上级
         if (wxApplyAdd.getType() != null && wxApplyAdd.getType() == WxUserAdd.CARD_SHARING_ADD) {
-            user.setInviteWxid(wxApplyAdd.getTo_wxid());
+            user.setInviteWxid(wxApplyAdd.getShare_wxid());
         }
-
         return user;
     }
 
