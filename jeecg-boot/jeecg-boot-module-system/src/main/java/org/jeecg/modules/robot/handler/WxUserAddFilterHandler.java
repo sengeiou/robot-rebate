@@ -54,8 +54,14 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
         // 2、微信用户，不存在==>直接添加用户，并同意好友申请
         WechatUser newUser = buildWechatUser(user, receive);
         wxUserService.saveOrUpdate(newUser);
-        String msg = receive.getMsg().replaceAll("\"", "\\\"").replaceAll("\\/","\\\\/");
-        log.info("--->content:{}", msg);
+
+        // 如果是分享的来源，这里不支持自动同意加好友
+        if (newUser.getSource() == WechatUserSourceEnum.CARD_SHARING_ADD.getCode()) {
+            return result;
+        }
+        String msg = receive.getMsg();
+        log.info("content-->{}", msg);
+        msg = msg.replaceAll("\"", "\\\"").replaceAll("\\/", "\\\\/");
         wecharHandler.agreeFriendVerify(receive.getRobot_wxid(), msg);
         return result;
     }
@@ -63,13 +69,13 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
     private WechatUser buildWechatUser(WechatUser user, WxReceive receive) {
         Date now = new Date();
         WxUserAdd wxApplyAdd = receive.getMsgObj(WxUserAdd.class);
-        if(null == user){
+        if (null == user) {
             user = new WechatUser();
             user.setRobotWxid(receive.getRobot_wxid());
             user.setWxid(receive.getFrom_wxid());
             user.setCreateTime(now);
             user.setState(WechatUserStateEnum.NORMAL.getCode());
-        }else{
+        } else {
             user.setUpdateTime(now);
         }
         user.setNickname(receive.getFrom_name());
@@ -77,6 +83,7 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
         user.setSource(getWxUserSource(wxApplyAdd.getType()));
         user.setSex(WechatUserSexEnum.of(wxApplyAdd.getSex()).getCode());
         user.setSyncTime(now);
+        user.setRegMessage(receive.getMsg());
         // 如果是卡片分享，则设置他的上级
         if (wxApplyAdd.getType() != null && wxApplyAdd.getType() == WxUserAdd.CARD_SHARING_ADD) {
             user.setInviteWxid(wxApplyAdd.getShare_wxid());
@@ -84,7 +91,7 @@ public class WxUserAddFilterHandler implements IWxFilterHandler {
         return user;
     }
 
-    private Integer getWxUserSource(Integer wxType){
+    private Integer getWxUserSource(Integer wxType) {
         if (null != wxType) {
             switch (wxType.intValue()) {
                 case WxUserAdd.SEARCH_QQ_ADD: // 搜索QQ号添加

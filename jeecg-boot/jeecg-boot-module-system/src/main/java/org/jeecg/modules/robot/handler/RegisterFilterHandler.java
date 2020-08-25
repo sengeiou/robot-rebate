@@ -31,7 +31,7 @@ public class RegisterFilterHandler implements IWxFilterHandler {
 
     @Override
     public WxFilterResult doFilter(HttpServletRequest req, WxReceive receive) {
-        if("800".equals(receive.getType()) || "900".equals(receive.getType()) || "910".equals(receive.getType())){
+        if (!"100".equals(receive.getType())) {
             return null;
         }
         WxFilterResult result = new WxFilterResult();
@@ -39,6 +39,10 @@ public class RegisterFilterHandler implements IWxFilterHandler {
         // 保存、查询 对应的机器人、用户信息
         WechatRobot robot = wxRobotService.register(receive.getRobot_wxid());
         req.setAttribute(WechatConstants.ROBOT, robot);
+
+        if (receive.getRobot_wxid().equals(receive.getFrom_wxid())) {
+            return result;
+        }
         WechatUser user = wxUserService.register(receive.getRobot_wxid(), receive.getFrom_wxid());
         req.setAttribute(WechatConstants.USER, user);
 
