@@ -1,4 +1,4 @@
-package org.jeecg.modules.robot.handler;
+package org.jeecg.modules.robot.filter;
 
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;

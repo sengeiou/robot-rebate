@@ -1,4 +1,4 @@
-package org.jeecg.modules.robot.handler;
+package org.jeecg.modules.robot.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.modules.robot.constants.WechatUserSexEnum;
@@ -8,6 +8,7 @@ import org.jeecg.modules.robot.entity.WechatUser;
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.entity.WxUserAdd;
+import org.jeecg.modules.robot.handler.WecharHandler;
 import org.jeecg.modules.robot.service.IWechatUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;

@@ -1,4 +1,4 @@
-package org.jeecg.modules.robot.handler;
+package org.jeecg.modules.robot.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.modules.robot.constants.WechatConstants;
@@ -7,6 +7,7 @@ import org.jeecg.modules.robot.entity.WechatRobot;
 import org.jeecg.modules.robot.entity.WechatUser;
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;
+import org.jeecg.modules.robot.filter.IWxFilterHandler;
 import org.jeecg.modules.robot.service.IWechatRobotService;
 import org.jeecg.modules.robot.service.IWechatUserService;
 import org.springframework.beans.factory.annotation.Autowired;

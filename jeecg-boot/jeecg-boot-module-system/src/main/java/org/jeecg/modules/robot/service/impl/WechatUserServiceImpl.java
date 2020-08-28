@@ -77,7 +77,8 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
         // 微信api中没有 ==> 报出异常
         if (null == wxFriend) {
             log.warn("！！！微信用户【{},{}】不存在信息", robotWxid, wxid);
-            throw new RuntimeException("！！！微信用户不存在");
+            //throw new RuntimeException("！！！微信用户不存在");
+            return null;
         }
 
         // 微信api中有 ==> 直接返回(并设置redis，保存到db)

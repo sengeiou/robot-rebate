@@ -3,7 +3,7 @@ package org.jeecg.modules.robot.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;
-import org.jeecg.modules.robot.handler.IWxFilterHandler;
+import org.jeecg.modules.robot.filter.IWxFilterHandler;
 import org.jeecg.modules.robot.handler.WecharHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
