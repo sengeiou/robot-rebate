@@ -3,7 +3,7 @@ package org.jeecg.modules.robot.entity;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import org.jeecg.modules.robot.handler.WecharHandler;
+import org.jeecg.modules.robot.URLUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,7 +25,7 @@ public class WxResult {
         if (StringUtils.isEmpty(data)) {
             return null;
         }
-        String content = WecharHandler.decodeMsg(data.trim());
+        String content = URLUtils.decode(data.trim());
         return JSON.parseObject(content, clazz);
     }
 
@@ -36,7 +36,7 @@ public class WxResult {
         if (StringUtils.isEmpty(data)) {
             return new ArrayList<T>(); // 注意，返回空list
         }
-        String content = WecharHandler.decodeMsg(data.trim());
+        String content = URLUtils.decode(data.trim());
         return JSON.parseArray(content, clazz);
     }
 

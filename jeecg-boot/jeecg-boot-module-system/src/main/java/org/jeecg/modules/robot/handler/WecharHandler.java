@@ -17,8 +17,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +27,6 @@ import java.util.Objects;
 public class WecharHandler {
     private URI API_URL = URI.create("http://127.0.0.1:8073/send");
     public static String KEY = "25C498727D264fbc85C8B4C393A6A92D";
-    public static String UTF_8 = "UTF-8";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -147,36 +144,6 @@ public class WecharHandler {
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
         log.info("修改好友备注,返回结果：{}",responseEntity.getBody());
         WxResult.throwInvalid(responseEntity);
-    }
-
-
-    public static String encodeMsg(String msg) {
-        if (null == msg) {
-            return null;
-        }
-        String encodeMsg = null;
-        try {
-            encodeMsg = URLEncoder.encode(msg, UTF_8);
-        } catch (Exception ex) {
-            log.error("！！！加密消息出错:{}", ex);
-            throw new RuntimeException(ex.getMessage());
-        }
-        return encodeMsg;
-    }
-
-
-    public static String decodeMsg(String msg) {
-        if (null == msg) {
-            return null;
-        }
-        String decodeMsg = null;
-        try {
-            decodeMsg = URLDecoder.decode(msg, UTF_8);
-        } catch (Exception ex) {
-            log.error("！！！解密消息出错:{}", ex);
-            throw new RuntimeException(ex.getMessage());
-        }
-        return decodeMsg;
     }
 
 

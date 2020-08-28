@@ -1,9 +1,11 @@
 package org.jeecg.modules.robot.controller;
 
+import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.filter.IWxFilterHandler;
+import org.jeecg.modules.robot.handler.TbkHandler;
 import org.jeecg.modules.robot.handler.WecharHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ public class RobotController {
 
 	@Autowired
 	private WecharHandler wecharHandler;
+
+	@Autowired
+	private TbkHandler tbkHandler;
 
 
 	@ResponseBody
@@ -52,6 +57,7 @@ public class RobotController {
 	@ResponseBody
 	@GetMapping("/getInfo/{key}")
 	public Object getInfo(@PathVariable("key") String key, HttpServletRequest req) throws Exception {
+		String val = req.getParameter("val");
 		Object result = null;
 		switch (key) {
 			case "get_friend_list": // 查询好友列表
@@ -66,6 +72,21 @@ public class RobotController {
 				break;
 			case "modify_friend_note": // 修改好友备注
 				wecharHandler.modifyFriendNote("csp961096506", "wxid_g3xnklexyaj722", "微小小");
+				break;
+
+			// 淘宝客
+			case "getItemIdByHttpPwd":
+				Long itemId = tbkHandler.getItemIdByHttpPwd(val);
+				if(null == itemId){
+					break;
+				}
+				TbkDgMaterialOptionalResponse.MapData obj = tbkHandler.getPushInfo(itemId, null);
+				if(null == obj){
+					break;
+				}
+				String url = (obj.getCouponShareUrl() != null ? obj.getCouponShareUrl() : obj.getUrl());
+				String tip = tbkHandler.createPushPwd(url, obj.getPictUrl());
+				log.info("tip:{}", tip);
 				break;
 		}
 		return result;
