@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.jeecg.modules.robot.URLUtils;
+import org.jeecg.modules.robot.utils.URLUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
@@ -44,7 +44,7 @@ public class WxReceive implements Serializable {
         log.info("传入微信消息:{}", json.toJSONString());
         WxReceive msg = JSONObject.toJavaObject(json, WxReceive.class);
         if (null != msg && null != msg.getMsg()) {
-            msg.setMsg(URLUtils.decode(msg.getMsg()));
+            msg.setMsg(URLUtil.decode(msg.getMsg()));
         }
         log.info("微信消息转为对象:{}", msg);
         return msg;

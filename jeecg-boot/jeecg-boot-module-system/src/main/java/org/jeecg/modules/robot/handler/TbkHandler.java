@@ -1,6 +1,5 @@
 package org.jeecg.modules.robot.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
@@ -9,9 +8,12 @@ import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.jeecg.modules.robot.URLUtils;
+import org.jeecg.modules.robot.utils.URLUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
@@ -35,6 +37,10 @@ public class TbkHandler {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private TbkLoginHandler tbkLoginHandler;
+
     // 匹配出 淘宝分享链接
     private static Pattern findHttpPwdRegs = Pattern.compile("https://m.tb.cn/([A-Za-z0-9_.=\\?]+) ");
     // 匹配出 商品id
@@ -42,7 +48,6 @@ public class TbkHandler {
         add(Pattern.compile("&id=(\\d+)&"));
         add(Pattern.compile("com/i(\\d+).htm"));
     }};
-
 
     /**
      * 解析 淘宝分享链接 ，得到商品id
@@ -114,7 +119,7 @@ public class TbkHandler {
         if (StringUtils.isNotEmpty(obj.getCouponShareUrl())) {
             String couponUrl = obj.getCouponShareUrl();
             log.warn("!!!卡券链接转化前：{}", couponUrl);
-            String temp = URLUtils.decode(couponUrl)
+            String temp = URLUtil.decode(couponUrl)
                     .replaceAll(";tpp_pvid:([0-9_.]+)", ";tpp_pvid:");
             obj.setCouponShareUrl("https:" + temp);
             log.warn("!!!卡券链接转化后：{}", temp);
@@ -123,7 +128,7 @@ public class TbkHandler {
         if (StringUtils.isNotEmpty(obj.getUrl())) {
             String url = obj.getUrl();
             log.warn("!!!详情链接转化前：{}", url);
-            String temp = URLUtils.decode(url)
+            String temp = URLUtil.decode(url)
                     .replaceAll("&pvid=([0-9_.]+)", "&pvid=null")
                     .replaceAll(";pvid:([0-9_.]+)", ";pvid:");
             obj.setUrl("https:" + temp);
@@ -161,30 +166,31 @@ public class TbkHandler {
         return (null != rsp.getData()) ? rsp.getData().getModel() : null;
     }
 
-    public void test() throws Exception{
-
+    public void testGetInfo() throws Exception{
+        String cookie = null;
         int i = 1;
         while (true){
-
+            if(null == cookie){
+                cookie = tbkLoginHandler.login();
+            }
             URI uul = URI.create("https://pub.alimama.com/openapi/param2/1/gateway.unionpub/report.getTbkOrderDetails.json?t=1597485201179&_tb_token_=537bfee7e33d5&jumpType=0&positionIndex=&pageNo=1&startTime=2020-08-12&endTime=2020-08-15&queryType=2&tkStatus=&memberType=&pageSize=40");
-            MultiValueMap<String, String> header = new LinkedMultiValueMap<String, String>();
-            header.add(HttpHeaders.CACHE_CONTROL,"no-cache");
-            header.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
-            header.add(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
-            header.add("cookie", "cna=L4+oFyZaUVYCAXFotwpdGiGu; lgc=%5Cu9648csp%5Cu9E4F; tracknick=%5Cu9648csp%5Cu9E4F; xlly_s=1; t=fec7ba9599c0169383aef18273f1b3be; _samesite_flag_=true; cookie2=1f5eaa2251ac44934aac0b0cd1046d0b; unb=1868642953; _l_g_=Ug%3D%3D; mt=ci=62_1; sgcookie=EBHpYDVtsTqxYurC9cgh1; uc1=existShop=true&cookie15=UIHiLt3xD8xYTw%3D%3D&cookie14=UoTV5O1Pbav2CA%3D%3D&pas=0&cookie16=URm48syIJ1yk0MX2J7mAAEhTuw%3D%3D&cookie21=Vq8l%2BKCLjhS4UhJVbhgU; uc3=nk2=0PJlsMGGBw%3D%3D&vt3=F8dCufXCn6nsqljVL44%3D&lg2=U%2BGCWk%2F75gdr5Q%3D%3D&id2=UondHP0kMwumtQ%3D%3D; csg=860925bb; cookie17=UondHP0kMwumtQ%3D%3D; dnk=%5Cu9648csp%5Cu9E4F; skt=a657068772c76314; existShop=MTU5ODcwMzgzMA%3D%3D; uc4=nk4=0%400njcll7Gx9NSEhcBETye3AX2&id4=0%40UOE3EhUQdsCIwTzXfbMIf9i4c37j; _cc_=URm48syIZQ%3D%3D; sg=%E9%B9%8F34; _nk_=%5Cu9648csp%5Cu9E4F; cookie1=BvAD2stbphTMAOcyeLnf2PSG9JTwRVC3qtbo74KIoa8%3D; _tb_token_=7f6376363b553");
-            header.add("referer", "https://pub.alimama.com/manage/effect/overview_orders.htm?spm=a219t.11816980.1998910419.db62784000.239375a5os4qGQ&jumpType=0&positionIndex=&pageNo=1&startTime=2020-08-20&endTime=2020-08-29");
-            header.add("x-requested-with", "XMLHttpRequest");
-            header.add("authority", "pub.alimama.com");
+            MultiValueMap<String, String> header = URLUtil.getHeader();
+            header.add(HttpHeaders.COOKIE,cookie);
 
             MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-
             HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
 
 
-            ResponseEntity<JSONObject> responseEntity = restTemplate.postForEntity(uul, httpEntity, JSONObject.class);
-            log.info("{}=发送结果：{}",i, responseEntity);
-            i++;
-            Thread.sleep(60000);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(uul, httpEntity, String.class);
+            String str = responseEntity.getBody();
+            log.info("{}=发送结果：{}",i, str);
+            if (str.indexOf("nologin") >= 0) {
+                log.info("{}=清空cookie");
+                cookie = null;
+            }else{
+                i++;
+                Thread.sleep(20000);
+            }
         }
     }
 }

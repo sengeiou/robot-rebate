@@ -88,6 +88,9 @@ public class RobotController {
 				String tip = tbkHandler.createPushPwd(url, obj.getPictUrl());
 				log.info("tip:{}", tip);
 				break;
+			case "test":
+				tbkHandler.testGetInfo();
+				break;
 		}
 		return result;
 	}

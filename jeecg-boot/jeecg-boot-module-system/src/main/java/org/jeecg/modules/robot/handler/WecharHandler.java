@@ -6,10 +6,9 @@ import org.jeecg.modules.robot.entity.SendMsgAbstract;
 import org.jeecg.modules.robot.entity.WxFriend;
 import org.jeecg.modules.robot.entity.WxResult;
 import org.jeecg.modules.robot.entity.WxRobot;
+import org.jeecg.modules.robot.utils.URLUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -44,7 +43,7 @@ public class WecharHandler {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         body.add("data", JSON.toJSONString(sendInfo));
 
-        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, getHeader());
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, URLUtil.getHeader());
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
 
         WxResult.throwInvalid(responseEntity);
@@ -61,7 +60,7 @@ public class WecharHandler {
         obj.put("type", "203");
         obj.put("key", WecharHandler.KEY);
         body.add("data", JSON.toJSONString(obj));
-        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, getHeader());
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, URLUtil.getHeader());
 
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
         WxResult.throwInvalid(responseEntity);
@@ -88,7 +87,7 @@ public class WecharHandler {
 
         obj.put("key", WecharHandler.KEY);
         body.add("data", JSON.toJSONString(obj));
-        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, getHeader());
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, URLUtil.getHeader());
 
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
         WxResult.throwInvalid(responseEntity);
@@ -115,7 +114,7 @@ public class WecharHandler {
 
         obj.put("key", WecharHandler.KEY);
         body.add("data", JSON.toJSONString(obj));
-        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, getHeader());
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, URLUtil.getHeader());
 
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
         log.info("同意好友请求,返回结果：{}",responseEntity.getBody());
@@ -139,19 +138,11 @@ public class WecharHandler {
 
         obj.put("key", WecharHandler.KEY);
         body.add("data", JSON.toJSONString(obj));
-        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, getHeader());
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, URLUtil.getHeader());
 
         ResponseEntity<WxResult> responseEntity = restTemplate.postForEntity(API_URL, httpEntity, WxResult.class);
         log.info("修改好友备注,返回结果：{}",responseEntity.getBody());
         WxResult.throwInvalid(responseEntity);
     }
 
-
-    private MultiValueMap<String, String> getHeader(){
-        MultiValueMap<String, String> header = new LinkedMultiValueMap<String, String>();
-        header.add(HttpHeaders.CACHE_CONTROL,"no-cache");
-        header.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
-        header.add(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
-        return header;
-    }
 }

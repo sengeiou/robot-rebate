@@ -1,7 +1,7 @@
 package org.jeecg.modules.robot.entity;
 
 import lombok.ToString;
-import org.jeecg.modules.robot.URLUtils;
+import org.jeecg.modules.robot.utils.URLUtil;
 
 /**
  * 发送文字消息(好友或者群)
@@ -20,6 +20,6 @@ public class SendTextMsg extends SendMsgAbstract {
 
     @Override
     public String getMsg() {
-        return URLUtils.encode(msg);
+        return URLUtil.encode(msg);
     }
 }
