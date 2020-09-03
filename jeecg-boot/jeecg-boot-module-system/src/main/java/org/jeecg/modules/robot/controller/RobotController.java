@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -87,6 +88,12 @@ public class RobotController {
 				String url = (obj.getCouponShareUrl() != null ? obj.getCouponShareUrl() : obj.getUrl());
 				String tip = tbkHandler.createPushPwd(url, obj.getPictUrl());
 				log.info("tip:{}", tip);
+				break;
+			case "testAdd":
+				tbkHandler.addAdzone("我的test2");
+				break;
+			case "testDel":
+				tbkHandler.delAdzone(Arrays.asList(110819800295L));
 				break;
 			case "test":
 				tbkHandler.testGetInfo();

@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.jeecg.JeecgApplication;
+import org.jeecg.modules.robot.entity.TbSession;
 import org.jeecg.modules.robot.utils.URLUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -97,15 +98,19 @@ public class TbkLoginHandler {
     /**
      * 登录方法，并得到cookie
      */
-    public String login() throws Exception{
-
+    public TbSession login() throws Exception{
+        TbSession session = getSession();
+        if (null != session) {
+            log.info("已经登录着:{}", session);
+            return session;
+        }
         // 加载登录页面
         DRIVER.get(LOGIN_URL);
 
         // 页面打开到最大化
         //DRIVER.manage().window().maximize();
 
-        Thread.sleep(1500); // 等待页面加载完
+        Thread.sleep(1000); // 等待页面加载完
 
         // 设置账号、密码
         Random rand = new Random();
@@ -113,16 +118,15 @@ public class TbkLoginHandler {
             WebElement userEl = DRIVER.findElement(By.xpath("//*[@id=\"fm-login-id\"]"));
             for (int i = 0; i < LOGIN_NAME.length(); i++) {
                 // 随机睡眠0-1秒
-                Thread.sleep(rand.nextInt(300));
+                Thread.sleep(rand.nextInt(200));
                 // 逐个输入单个字符
                 userEl.sendKeys("" + LOGIN_NAME.charAt(i));
             }
-
             WebElement pwdEl = DRIVER.findElement(By.xpath("//*[@id=\"fm-login-password\"]"));
             if(StringUtils.isEmpty(pwdEl.getText())){
                 for (int j = 0; j < LOGIN_PWD.length(); j++) {
                     // 随机睡眠0-1秒
-                    Thread.sleep(rand.nextInt(300));
+                    Thread.sleep(rand.nextInt(200));
                     // 逐个输入单个字符
                     pwdEl.sendKeys("" + LOGIN_PWD.charAt(j));
                 }
@@ -151,7 +155,7 @@ public class TbkLoginHandler {
         DRIVER.findElement(By.xpath("//*[@id=\"login-form\"]/div[4]/button")).click();
 
         // 检测是否登录成功
-        Set<Cookie> cookies = null;
+
         int times = 10; // 检测15次
         while (true) {
             log.info("登录检查：{}", times);
@@ -159,7 +163,7 @@ public class TbkLoginHandler {
             boolean isOk = current.startsWith(MAIN_PREFIX);
             if (isOk) {
                 log.info("查询cookie：{}", times);
-                cookies = DRIVER.manage().getCookies();
+                session = getSession();
                 break;
             }
             if(times <= 1){
@@ -168,15 +172,32 @@ public class TbkLoginHandler {
             Thread.sleep(2000);
             times --;
         }
-        if(null == cookies){
+        if(null == session){
             log.error("！！！登录失败");
             return null;
         }
-        String cookieStr = cookies.stream().map(co -> co.getName() + "=" + co.getValue() + ";").collect(Collectors.joining(""));
-        log.info("登录成功:{}", cookieStr);
-        return cookieStr;
+        log.info("登录成功:{}", session);
+        return session;
     }
 
+    /**
+     * 得到登录信息
+     */
+    public TbSession getSession(){
+        Set<Cookie> cookies = DRIVER.manage().getCookies();
+        if(null == cookies){
+            return null;
+        }
+        String cookieStr = cookies.stream().map(co -> co.getName() + "=" + co.getValue() + ";").collect(Collectors.joining(""));
+        String token = cookies.stream().filter(co -> "_tb_token_".equals(co.getName())).map(co -> co.getValue()).findFirst().orElse(null);
+        if(StringUtils.isEmpty(cookieStr) || StringUtils.isEmpty(token)){
+            return null;
+        }
+        TbSession session = new TbSession();
+        session.setToken(token);
+        session.setCookie(cookieStr);
+        return session;
+    }
 
     /**
      * 获取登录用户信息
@@ -198,28 +219,6 @@ public class TbkLoginHandler {
         }
         String msg = resp.getBody();
         log.info("得到登录用户信息：{}", msg);
-        /*
-        HttpGet request = new HttpGet(getInfo);//这里发送get请求
-
-        //添加请求头
-        request.addHeader(HttpHeaders.PRAGMA, "no-cache");
-        //设置浏览器类型
-        request.addHeader(HttpHeaders.USER_AGENT, USER_AGENT);
-        request.addHeader(HttpHeaders.ACCEPT_LANGUAGE, "zh-CN,en,*");
-        request.addHeader(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
-        //设置cookie
-        request.addHeader(HttpHeaders.COOKIE, cookie);
-        // 获取当前客户端对象
-        HttpClient httpClient = HttpClients.custom().build();
-
-        // 通过请求对象获取响应对象
-        HttpResponse response = httpClient.execute(request);
-        String msg = null;
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            msg = EntityUtils.toString(response.getEntity(),"utf-8");
-        }
-        log.info("请求到信息:{}",msg);
-         */
         return msg;
     }
 
