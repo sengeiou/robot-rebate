@@ -14,74 +14,32 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="用户微信ID">
-          <a-input placeholder="请输入用户微信ID" v-decorator="['wxid', validatorRules.wxid ]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="所属机器人微信ID">
-          <a-input placeholder="请输入所属机器人微信ID" v-decorator="['robotWxid', validatorRules.robotWxid ]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="状态">
-          <a-input placeholder="请输入状态" v-decorator="['state', validatorRules.state ]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="来源">
-          <a-input placeholder="请输入来源" v-decorator="['source', validatorRules.source ]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="用户昵称">
-          <a-input placeholder="请输入用户昵称" v-decorator="['nickname', {}]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="备注">
-          <a-input placeholder="请输入备注" v-decorator="['note', {}]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="性别">
-          <a-input placeholder="请输入性别" v-decorator="['sex', {}]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="头像">
-          <a-input placeholder="请输入头像" v-decorator="['headUrl', {}]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="邀请者微信ID">
-          <a-input placeholder="请输入邀请者微信ID" v-decorator="['inviteWxid', {}]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="申请添加好友时发送的消息">
-          <a-input placeholder="请输入申请添加好友时发送的消息" v-decorator="['regMessage', {}]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="同步时间">
-          <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'syncTime', validatorRules.syncTime ]" />
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="Pid">
           <a-input placeholder="请输入Pid" v-decorator="['pid', validatorRules.pid ]" />
+        </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="产品ID">
+          <a-input placeholder="请输入产品ID" v-decorator="['pubId', validatorRules.pubId ]" />
+        </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="媒体ID">
+          <a-input placeholder="请输入媒体ID" v-decorator="['siteId', validatorRules.siteId ]" />
+        </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="推广位ID">
+          <a-input placeholder="请输入推广位ID" v-decorator="['adzoneId', validatorRules.adzoneId ]" />
+        </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="推广位名称">
+          <a-input placeholder="请输入推广位名称" v-decorator="['adzoneName', {}]" />
         </a-form-item>
 		
       </a-form>
@@ -97,7 +55,7 @@
   import moment from "moment"
 
   export default {
-    name: "WechatUserModal",
+    name: "TbkSpreadModal",
     data () {
       return {
         title:"操作",
@@ -115,16 +73,14 @@
         confirmLoading: false,
         form: this.$form.createForm(this),
         validatorRules:{
-        wxid:{rules: [{ required: true, message: '请输入用户微信ID!' }]},
-        robotWxid:{rules: [{ required: true, message: '请输入所属机器人微信ID!' }]},
-        state:{rules: [{ required: true, message: '请输入状态!' }]},
-        source:{rules: [{ required: true, message: '请输入来源!' }]},
-        syncTime:{rules: [{ required: true, message: '请输入同步时间!' }]},
         pid:{rules: [{ required: true, message: '请输入Pid!' }]},
+        pubId:{rules: [{ required: true, message: '请输入产品ID!' }]},
+        siteId:{rules: [{ required: true, message: '请输入媒体ID!' }]},
+        adzoneId:{rules: [{ required: true, message: '请输入推广位ID!' }]},
         },
         url: {
-          add: "/robot/wechatUser/add",
-          edit: "/robot/wechatUser/edit",
+          add: "/robot/tbkSpread/add",
+          edit: "/robot/tbkSpread/edit",
         },
       }
     },
@@ -139,9 +95,8 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'wxid','robotWxid','state','source','nickname','note','sex','headUrl','inviteWxid','regMessage','pid'))
+          this.form.setFieldsValue(pick(this.model,'pid','pubId','siteId','adzoneId','adzoneName'))
 		  //时间格式化
-          this.form.setFieldsValue({syncTime:this.model.syncTime?moment(this.model.syncTime):null})
         });
 
       },
@@ -166,7 +121,6 @@
             }
             let formData = Object.assign(this.model, values);
             //时间格式化
-            formData.syncTime = formData.syncTime?formData.syncTime.format('YYYY-MM-DD HH:mm:ss'):null;
             
             console.log(formData)
             httpAction(httpurl,formData,method).then((res)=>{

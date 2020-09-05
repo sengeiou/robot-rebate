@@ -2,12 +2,14 @@ package org.jeecg.modules.robot.entity;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
  * 淘宝客结果统一对象
  */
+@Slf4j
 @Data
 public class TbResult {
     private int resultCode;   // 返回码
@@ -22,8 +24,9 @@ public class TbResult {
             throw new RuntimeException("！！！调用淘宝客API异常!");
         }
         TbResult msg = responseEntity.getBody();
+        log.info("返回结果:{}", msg);
         if (200 != msg.getResultCode()) {
-            throw new RuntimeException("！！！调用淘宝客API失败:" + msg.getResultCode());
+            throw new RuntimeException("！！！调用淘宝客API失败");
         }
     }
 

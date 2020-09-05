@@ -76,7 +76,13 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="同步时间">
-          <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'syncTime', {}]" />
+          <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'syncTime', validatorRules.syncTime ]" />
+        </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="Pid">
+          <a-input placeholder="请输入Pid" v-decorator="['pid', validatorRules.pid ]" />
         </a-form-item>
 		
       </a-form>
@@ -112,6 +118,8 @@
         robotWxid:{rules: [{ required: true, message: '请输入所属机器人微信ID!' }]},
         state:{rules: [{ required: true, message: '请输入状态!' }]},
         source:{rules: [{ required: true, message: '请输入来源!' }]},
+        syncTime:{rules: [{ required: true, message: '请输入同步时间!' }]},
+        pid:{rules: [{ required: true, message: '请输入Pid!' }]},
         },
         url: {
           add: "/robot/wechatUser/add",
@@ -130,7 +138,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'wxid','robotWxid','state','source','nickname','note','sex','headUrl','inviteWxid','regMessage'))
+          this.form.setFieldsValue(pick(this.model,'wxid','robotWxid','state','source','nickname','note','sex','headUrl','inviteWxid','regMessage','pid'))
 		  //时间格式化
           this.form.setFieldsValue({syncTime:this.model.syncTime?moment(this.model.syncTime):null})
         });

@@ -8,9 +8,7 @@ import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.jeecg.modules.robot.entity.TbAdzone;
-import org.jeecg.modules.robot.entity.TbResult;
-import org.jeecg.modules.robot.entity.TbSession;
+import org.jeecg.modules.robot.entity.*;
 import org.jeecg.modules.robot.utils.URLUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -29,7 +27,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -203,15 +200,18 @@ public class TbkHandler {
         // 处理返回信息
         TbResult.throwInvalid(responseEntity);
         TbAdzone obj = responseEntity.getBody().getData().toJavaObject(TbAdzone.class);
-        log.info("新增推广位:{}", obj);
+        if (null == obj || null == obj.getResult() || obj.getResult() == false) {
+            throw new RuntimeException("！！！添加推广拉失败");
+        }
+        log.info("添加推广位结果:{}", obj);
         return obj;
     }
 
     /**
      * 批量删除推广位
      */
-    public void delAdzone(List<Long> adzoneIdList) throws Exception{
-        Objects.requireNonNull(adzoneIdList, "！！！推广位ID不能为空");
+    public void delAdzone(String adzoneIds) throws Exception{
+        Objects.requireNonNull(adzoneIds, "！！！推广位ID不能为空");
 
         TbSession session = tbkLoginHandler.login();
         if(null == session){
@@ -226,7 +226,6 @@ public class TbkHandler {
         header.add(HttpHeaders.COOKIE,cookie);
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-        String adzoneIds = adzoneIdList.stream().map(x -> x + "").collect(Collectors.joining(","));
         body.add("adzoneIds", adzoneIds);
         body.add("sceneCode","adzone_common");
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
@@ -234,38 +233,41 @@ public class TbkHandler {
 
         TbResult.throwInvalid(responseEntity);
         TbResult str = responseEntity.getBody();
-        log.info("结果:{}", str);
+        log.info("批量删除推广位:{}", str);
     }
 
-    public void testGetInfo() throws Exception{
-        TbSession session = null;
-        int i = 1;
-        while (true){
-            if(null == session){
-                session = tbkLoginHandler.login();
-            }
-            String token = session.getToken();
-            String cookie = session.getCookie();
 
-            URI uul = URI.create("https://pub.alimama.com/openapi/param2/1/gateway.unionpub/report.getTbkOrderDetails.json?t=1597485201179&_tb_token_="+token+"&jumpType=0&positionIndex=&pageNo=1&startTime=2020-08-12&endTime=2020-08-15&queryType=2&tkStatus=&memberType=&pageSize=40");
-            MultiValueMap<String, String> header = URLUtil.getHeader();
-            header.add(HttpHeaders.COOKIE,cookie);
-
-            MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-            HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
-
-
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(uul, httpEntity, String.class);
-            String str = responseEntity.getBody();
-            log.info("{}=发送结果：{}",i, str);
-            if (str.indexOf("nologin") >= 0) {
-                log.info("{}=清空cookie");
-                cookie = null;
-            }else{
-                i++;
-                Thread.sleep(20000);
-            }
+    /**
+     * 查询淘宝订单信息
+     */
+    public TbOrderPage getTbOrderPage(TbOrderPageSearch search) throws Exception{
+        Objects.requireNonNull(search, "！！！搜索条件不能为空");
+        if(null == search.getStartTime()){
+            search.setStartTime(TbOrderPageSearch.defaultStartTime());
         }
+
+        TbSession session = tbkLoginHandler.login();
+        if(null == session){
+            throw new RuntimeException("！！！调用淘宝客登录失败");
+        }
+        String token = session.getToken();
+        String cookie = session.getCookie();
+        String http = "https://pub.alimama.com/openapi/param2/1/gateway.unionpub/report.getTbkOrderDetails.json?t=" + System.currentTimeMillis() + "&_tb_token_=" + token + "&jumpType=0&positionIndex=" + search.getParams();
+        log.info("http:{}",http);
+        URI uul = URI.create(http);
+        MultiValueMap<String, String> header = URLUtil.getHeader();
+        header.add(HttpHeaders.COOKIE,cookie);
+
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
+        ResponseEntity<TbResult> responseEntity = restTemplate.postForEntity(uul, httpEntity, TbResult.class);
+
+        TbResult.throwInvalid(responseEntity);
+
+        TbOrderPage page = responseEntity.getBody().getData().toJavaObject(TbOrderPage.class);
+
+        log.info("查询淘宝订单信息结果：{}", page);
+        return page;
     }
 
 }

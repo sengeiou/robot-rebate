@@ -2,6 +2,7 @@ package org.jeecg.modules.robot.controller;
 
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.jeecg.modules.robot.entity.TbOrderPageSearch;
 import org.jeecg.modules.robot.entity.WxFilterResult;
 import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.filter.IWxFilterHandler;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -89,14 +89,16 @@ public class RobotController {
 				String tip = tbkHandler.createPushPwd(url, obj.getPictUrl());
 				log.info("tip:{}", tip);
 				break;
-			case "testAdd":
-				tbkHandler.addAdzone("我的test2");
+			case "addAdzone":
+				tbkHandler.addAdzone(val);
 				break;
-			case "testDel":
-				tbkHandler.delAdzone(Arrays.asList(110819800295L));
+			case "delAdzone":
+				tbkHandler.delAdzone(val);
 				break;
-			case "test":
-				tbkHandler.testGetInfo();
+			case "getTbOrderPage":
+				TbOrderPageSearch search = new TbOrderPageSearch();
+				search.setEndTime(val);
+				tbkHandler.getTbOrderPage(search);
 				break;
 		}
 		return result;

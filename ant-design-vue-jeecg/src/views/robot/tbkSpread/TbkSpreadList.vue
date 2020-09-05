@@ -7,29 +7,29 @@
         <a-row :gutter="24">
 
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="用户微信ID">
-              <a-input placeholder="请输入用户微信ID" v-model="queryParam.wxid"></a-input>
+            <a-form-item label="Pid">
+              <a-input placeholder="请输入Pid" v-model="queryParam.pid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="所属机器人微信ID">
-              <a-input placeholder="请输入所属机器人微信ID" v-model="queryParam.robotWxid"></a-input>
+            <a-form-item label="产品ID">
+              <a-input placeholder="请输入产品ID" v-model="queryParam.pubId"></a-input>
             </a-form-item>
           </a-col>
         <template v-if="toggleSearchStatus">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="状态">
-              <a-input placeholder="请输入状态" v-model="queryParam.state"></a-input>
+            <a-form-item label="媒体ID">
+              <a-input placeholder="请输入媒体ID" v-model="queryParam.siteId"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="来源">
-              <a-input placeholder="请输入来源" v-model="queryParam.source"></a-input>
+            <a-form-item label="推广位ID">
+              <a-input placeholder="请输入推广位ID" v-model="queryParam.adzoneId"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="用户昵称">
-              <a-input placeholder="请输入用户昵称" v-model="queryParam.nickname"></a-input>
+            <a-form-item label="推广位名称">
+              <a-input placeholder="请输入推广位名称" v-model="queryParam.adzoneName"></a-input>
             </a-form-item>
           </a-col>
           </template>
@@ -51,7 +51,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('微信用户')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('推广位')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -104,24 +104,24 @@
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
-    <wechatUser-modal ref="modalForm" @ok="modalFormOk"></wechatUser-modal>
+    <tbkSpread-modal ref="modalForm" @ok="modalFormOk"></tbkSpread-modal>
   </a-card>
 </template>
 
 <script>
   import '@/assets/less/TableExpand.less'
-  import WechatUserModal from './modules/WechatUserModal'
+  import TbkSpreadModal from './modules/TbkSpreadModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 
   export default {
-    name: "WechatUserList",
+    name: "TbkSpreadList",
     mixins:[JeecgListMixin],
     components: {
-      WechatUserModal
+      TbkSpreadModal
     },
     data () {
       return {
-        description: '微信用户管理页面',
+        description: '推广位管理页面',
         // 表头
         columns: [
           {
@@ -135,64 +135,29 @@
             }
            },
 		   {
-            title: '用户微信ID',
-            align:"center",
-            dataIndex: 'wxid'
-           },
-		   {
-            title: '所属机器人微信ID',
-            align:"center",
-            dataIndex: 'robotWxid'
-           },
-		   {
-            title: '状态',
-            align:"center",
-            dataIndex: 'state'
-           },
-		   {
-            title: '来源',
-            align:"center",
-            dataIndex: 'source'
-           },
-		   {
-            title: '用户昵称',
-            align:"center",
-            dataIndex: 'nickname'
-           },
-		   {
-            title: '备注',
-            align:"center",
-            dataIndex: 'note'
-           },
-		   {
-            title: '性别',
-            align:"center",
-            dataIndex: 'sex'
-           },
-		   {
-            title: '头像',
-            align:"center",
-            dataIndex: 'headUrl'
-           },
-		   {
-            title: '邀请者微信ID',
-            align:"center",
-            dataIndex: 'inviteWxid'
-           },
-		   {
-            title: '申请添加好友时发送的消息',
-            align:"center",
-            dataIndex: 'regMessage'
-           },
-		   {
-            title: '同步时间',
-            align:"center",
-            dataIndex: 'syncTime'
-           },
-		   {
             title: 'Pid',
             align:"center",
             dataIndex: 'pid'
+           },
+		   {
+            title: '产品ID',
+            align:"center",
+            dataIndex: 'pubId'
+           },
+		   {
+            title: '媒体ID',
+            align:"center",
+            dataIndex: 'siteId'
+           },
+		   {
+            title: '推广位ID',
+            align:"center",
+            dataIndex: 'adzoneId'
+           },
+		   {
+            title: '推广位名称',
+            align:"center",
+            dataIndex: 'adzoneName'
            },
           {
             title: '操作',
@@ -202,11 +167,11 @@
           }
         ],
 		url: {
-          list: "/robot/wechatUser/list",
-          delete: "/robot/wechatUser/delete",
-          deleteBatch: "/robot/wechatUser/deleteBatch",
-          exportXlsUrl: "robot/wechatUser/exportXls",
-          importExcelUrl: "robot/wechatUser/importExcel",
+          list: "/robot/tbkSpread/list",
+          delete: "/robot/tbkSpread/delete",
+          deleteBatch: "/robot/tbkSpread/deleteBatch",
+          exportXlsUrl: "robot/tbkSpread/exportXls",
+          importExcelUrl: "robot/tbkSpread/importExcel",
        },
     }
   },
