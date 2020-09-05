@@ -27,8 +27,8 @@ import java.util.List;
 @Slf4j
 @Service
 public class TbkTradeServiceImpl extends ServiceImpl<TbkTradeMapper, TbkTrade> implements ITbkTradeService {
-    /*@Autowired
-    private TbkTradeMapper tbkTradeMapper;*/
+    @Autowired
+    private TbkTradeMapper tbkTradeMapper;
 
     @Autowired
     private TbkHandler tbkHandler;
@@ -53,7 +53,7 @@ public class TbkTradeServiceImpl extends ServiceImpl<TbkTradeMapper, TbkTrade> i
                     trade.setUpdateTime(now);
                     tradeList.add(trade);
                 });
-                //tbkTradeMapper.inserReplaceBatch(tradeList);
+                tbkTradeMapper.inserReplaceBatch(tradeList);
 
             }
 
