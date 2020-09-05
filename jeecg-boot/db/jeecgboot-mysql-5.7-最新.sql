@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-09-05 15:54:40
+Date: 2020-09-05 21:47:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1578,6 +1578,7 @@ CREATE TABLE `qrtz_cron_triggers` (
 INSERT INTO `qrtz_cron_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.message.job.SendMsgJob', 'DEFAULT', '0/50 * * * * ? *', 'Asia/Shanghai');
 INSERT INTO `qrtz_cron_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.SampleJob', 'DEFAULT', '0/1 * * * * ?', 'Asia/Shanghai');
 INSERT INTO `qrtz_cron_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.SampleParamJob', 'DEFAULT', '0/1 * * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.TbkTradeSyncJob', 'DEFAULT', '* 0/5 * * * ? *', 'Asia/Shanghai');
 
 -- ----------------------------
 -- Table structure for `qrtz_fired_triggers`
@@ -1628,6 +1629,7 @@ CREATE TABLE `qrtz_job_details` (
 INSERT INTO `qrtz_job_details` VALUES ('MyScheduler', 'org.jeecg.modules.message.job.SendMsgJob', 'DEFAULT', null, 'org.jeecg.modules.message.job.SendMsgJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
 INSERT INTO `qrtz_job_details` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.SampleJob', 'DEFAULT', null, 'org.jeecg.modules.quartz.job.SampleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D65746572707800);
 INSERT INTO `qrtz_job_details` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.SampleParamJob', 'DEFAULT', null, 'org.jeecg.modules.quartz.job.SampleParamJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D6574657274000573636F74747800);
+INSERT INTO `qrtz_job_details` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.TbkTradeSyncJob', 'DEFAULT', null, 'org.jeecg.modules.quartz.job.TbkTradeSyncJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C77080000001000000001740009706172616D657465727400036162637800);
 
 -- ----------------------------
 -- Table structure for `qrtz_locks`
@@ -1675,7 +1677,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1599291555693', '1599291982949', '10000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1599313144644', '1599313411537', '10000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -1755,6 +1757,7 @@ CREATE TABLE `qrtz_triggers` (
 INSERT INTO `qrtz_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.message.job.SendMsgJob', 'DEFAULT', 'org.jeecg.modules.message.job.SendMsgJob', 'DEFAULT', null, '1588405730000', '1588405680000', '5', 'PAUSED', 'CRON', '1588405284000', '0', null, '0', '');
 INSERT INTO `qrtz_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.SampleJob', 'DEFAULT', 'org.jeecg.modules.quartz.job.SampleJob', 'DEFAULT', null, '1588405730000', '1588405729000', '5', 'PAUSED', 'CRON', '1588405237000', '0', null, '0', '');
 INSERT INTO `qrtz_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.SampleParamJob', 'DEFAULT', 'org.jeecg.modules.quartz.job.SampleParamJob', 'DEFAULT', null, '1588405236000', '1588405235000', '5', 'PAUSED', 'CRON', '1588405221000', '0', null, '0', '');
+INSERT INTO `qrtz_triggers` VALUES ('MyScheduler', 'org.jeecg.modules.quartz.job.TbkTradeSyncJob', 'DEFAULT', 'org.jeecg.modules.quartz.job.TbkTradeSyncJob', 'DEFAULT', null, '1599312600000', '1599312395703', '5', 'ERROR', 'CRON', '1599305016000', '0', null, '0', '');
 
 -- ----------------------------
 -- Table structure for `sys_announcement`
@@ -3832,6 +3835,15 @@ INSERT INTO `sys_log` VALUES ('1302149704638783490', '2', '机器人-分页列�
 INSERT INTO `sys_log` VALUES ('1302149730366644226', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null, pid=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@45ca20ac', null, '20', 'admin', '2020-09-05 15:41:03', null, null);
 INSERT INTO `sys_log` VALUES ('1302150943086731265', '2', '推广位-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkSpreadController.queryPageList()', null, '  tbkSpread: TbkSpread(id=null, pid=null, pubId=null, siteId=null, adzoneId=null, adzoneName=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@5adce94b', null, '12', 'admin', '2020-09-05 15:45:52', null, null);
 INSERT INTO `sys_log` VALUES ('1302150956147793922', '2', '淘宝客订单-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkTradeController.queryPageList()', null, '  tbkTrade: TbkTrade(id=null, tradeId=null, tradeParentId=null, clickTime=null, tkCreateTime=null, tbPaidTime=null, tkPaidTime=null, tkStatusText=null, tkStatus=null, itemId=null, itemImg=null, itemLink=null, itemTitle=null, itemNum=null, itemPrice=null, itemCategoryName=null, sellerNick=null, sellerShopTitle=null, pid=null, pubId=null, siteId=null, siteName=null, adzoneId=null, adzoneName=null, orderType=null, alipayTotalPrice=null, totalCommissionRate=null, totalCommissionFee=null, subsidyFee=null, subsidyRate=null, subsidyType=null, incomeRate=null, pubShareRate=null, tkTotalRate=null, tkCommissionRateForMediaPlatform=null, tkCommissionFeeForMediaPlatform=null, pubSharePreFee=null, tkCommissionPreFeeForMediaPlatform=null, tkOrderRoleText=null, tkOrderRole=null, terminalType=null, pubShareFee=null, tkDepositTime=null, alimamaRate=null, alimamaShareFee=null, depositPrice=null, tbDepositTime=null, itemPlatformTypeText=null, refundTag=null, preSell=null, tkBizTag=null, flowSource=null, supportItemClick=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@29544670', null, '16', 'admin', '2020-09-05 15:45:55', null, null);
+INSERT INTO `sys_log` VALUES ('1302155674915938305', '2', '淘宝客订单-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkTradeController.queryPageList()', null, '  tbkTrade: TbkTrade(id=null, tradeId=null, tradeParentId=null, clickTime=null, tkCreateTime=null, tbPaidTime=null, tkPaidTime=null, tkStatusText=null, tkStatus=null, itemId=null, itemImg=null, itemLink=null, itemTitle=null, itemNum=null, itemPrice=null, itemCategoryName=null, sellerNick=null, sellerShopTitle=null, pid=null, pubId=null, siteId=null, siteName=null, adzoneId=null, adzoneName=null, orderType=null, alipayTotalPrice=null, totalCommissionRate=null, totalCommissionFee=null, subsidyFee=null, subsidyRate=null, subsidyType=null, incomeRate=null, pubShareRate=null, tkTotalRate=null, tkCommissionRateForMediaPlatform=null, tkCommissionFeeForMediaPlatform=null, pubSharePreFee=null, tkCommissionPreFeeForMediaPlatform=null, tkOrderRoleText=null, tkOrderRole=null, terminalType=null, pubShareFee=null, tkDepositTime=null, alimamaRate=null, alimamaShareFee=null, depositPrice=null, tbDepositTime=null, itemPlatformTypeText=null, refundTag=null, preSell=null, tkBizTag=null, flowSource=null, supportItemClick=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@1ff73a5b', null, '82', 'admin', '2020-09-05 16:04:40', null, null);
+INSERT INTO `sys_log` VALUES ('1302187064684421122', '1', '用户名: 管理员,退出成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-09-05 18:09:24', null, null);
+INSERT INTO `sys_log` VALUES ('1302187103771140098', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-09-05 18:09:34', null, null);
+INSERT INTO `sys_log` VALUES ('1302187122825863170', '2', '推广位-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkSpreadController.queryPageList()', null, '  tbkSpread: TbkSpread(id=null, pid=null, pubId=null, siteId=null, adzoneId=null, adzoneName=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@6a69574b', null, '63', 'admin', '2020-09-05 18:09:38', null, null);
+INSERT INTO `sys_log` VALUES ('1302187306779648001', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null, pid=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@256cd568', null, '16', 'admin', '2020-09-05 18:10:22', null, null);
+INSERT INTO `sys_log` VALUES ('1302187311619874817', '2', '推广位-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkSpreadController.queryPageList()', null, '  tbkSpread: TbkSpread(id=null, pid=null, pubId=null, siteId=null, adzoneId=null, adzoneName=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@5850d9d0', null, '22', 'admin', '2020-09-05 18:10:23', null, null);
+INSERT INTO `sys_log` VALUES ('1302205593861140482', '1', '用户名: 管理员,退出成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-09-05 19:23:02', null, null);
+INSERT INTO `sys_log` VALUES ('1302205626698346498', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-09-05 19:23:10', null, null);
+INSERT INTO `sys_log` VALUES ('1302205633786720258', '2', '推广位-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkSpreadController.queryPageList()', null, '  tbkSpread: TbkSpread(id=null, pid=null, pubId=null, siteId=null, adzoneId=null, adzoneName=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@451d6d71', null, '206', 'admin', '2020-09-05 19:23:12', null, null);
 
 -- ----------------------------
 -- Table structure for `sys_permission`
@@ -4102,6 +4114,7 @@ CREATE TABLE `sys_quartz_job` (
 INSERT INTO `sys_quartz_job` VALUES ('df26ecacf0f75d219d746750fe84bbee', null, null, '0', 'admin', '2020-05-02 15:40:35', 'org.jeecg.modules.quartz.job.SampleParamJob', '0/1 * * * * ?', 'scott', '带参测试 后台将每隔1秒执行输出日志', '-1');
 INSERT INTO `sys_quartz_job` VALUES ('a253cdfc811d69fa0efc70d052bc8128', 'admin', '2019-03-30 12:44:48', '0', 'admin', '2020-05-02 15:48:49', 'org.jeecg.modules.quartz.job.SampleJob', '0/1 * * * * ?', null, null, '-1');
 INSERT INTO `sys_quartz_job` VALUES ('5b3d2c087ad41aa755fc4f89697b01e7', 'admin', '2019-04-11 19:04:21', '0', 'admin', '2020-05-02 15:48:48', 'org.jeecg.modules.message.job.SendMsgJob', '0/50 * * * * ? *', null, null, '-1');
+INSERT INTO `sys_quartz_job` VALUES ('1302158357257138177', 'admin', '2020-09-05 16:15:20', '0', 'admin', '2020-09-05 19:23:37', 'org.jeecg.modules.quartz.job.TbkTradeSyncJob', '* 0/5 * * * ? *', 'abc', '定时同步淘宝客订单', '0');
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -4772,6 +4785,17 @@ CREATE TABLE `tbk_spread` (
 -- ----------------------------
 -- Records of tbk_spread
 -- ----------------------------
+INSERT INTO `tbk_spread` VALUES ('1302185956968734721', 'mm_1106390200_1962050151_110823350105', '1106390200', '1962050151', '110823350105', '销售_1', '2020-09-05 18:04:50', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302185956993900546', 'mm_1106390200_1962050151_110825300049', '1106390200', '1962050151', '110825300049', '销售_2', '2020-09-05 18:04:50', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302186506812628993', 'mm_1106390200_1962050151_110821450145', '1106390200', '1962050151', '110821450145', '销售_3', '2020-09-05 18:07:10', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302186506821017602', 'mm_1106390200_1962050151_110820000493', '1106390200', '1962050151', '110820000493', '销售_4', '2020-09-05 18:07:10', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302187273728532482', 'mm_1106390200_1962050151_110822050129', '1106390200', '1962050151', '110822050129', '销售_5', '2020-09-05 18:10:13', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302187273736921090', 'mm_1106390200_1962050151_110821000457', '1106390200', '1962050151', '110821000457', '销售_6', '2020-09-05 18:10:13', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302187273736921091', 'mm_1106390200_1962050151_110824350070', '1106390200', '1962050151', '110824350070', '销售_7', '2020-09-05 18:10:13', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302187273741115393', 'mm_1106390200_1962050151_110821000458', '1106390200', '1962050151', '110821000458', '销售_8', '2020-09-05 18:10:13', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302187273741115394', 'mm_1106390200_1962050151_110826700020', '1106390200', '1962050151', '110826700020', '销售_9', '2020-09-05 18:10:13', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302187273741115395', 'mm_1106390200_1962050151_110825900036', '1106390200', '1962050151', '110825900036', '销售_10', '2020-09-05 18:10:13', null, null, null);
+INSERT INTO `tbk_spread` VALUES ('1302240016967127042', 'mm_1106390200_1962050151_110827650031', '1106390200', '1962050151', '110827650031', '销售_11', '2020-09-05 21:39:36', null, null, null);
 
 -- ----------------------------
 -- Table structure for `tbk_trade`
@@ -4792,7 +4816,7 @@ CREATE TABLE `tbk_trade` (
   `item_link` varchar(300) DEFAULT NULL COMMENT '商品链接',
   `item_title` varchar(200) DEFAULT NULL COMMENT '商品标题',
   `item_num` int(11) DEFAULT NULL COMMENT '商品数量',
-  `item_price` decimal(20,6) DEFAULT NULL COMMENT '商品单价',
+  `item_price` decimal(20,2) DEFAULT NULL COMMENT '商品单价',
   `item_category_name` varchar(200) DEFAULT NULL COMMENT '类目名称,如："电子/电工"',
   `seller_nick` varchar(200) DEFAULT NULL COMMENT '掌柜旺旺',
   `seller_shop_title` varchar(200) DEFAULT NULL COMMENT '店铺名称',
@@ -4803,27 +4827,27 @@ CREATE TABLE `tbk_trade` (
   `adzone_id` bigint(20) DEFAULT NULL COMMENT '推广位ID,如：110732600234',
   `adzone_name` varchar(100) DEFAULT NULL COMMENT '推广位名称,如："薇家雅适"',
   `order_type` varchar(50) DEFAULT NULL COMMENT '订单类型 如："淘宝"',
-  `alipay_total_price` decimal(20,6) DEFAULT NULL COMMENT '付款金额 如：46.56',
-  `total_commission_rate` decimal(20,6) DEFAULT NULL COMMENT '佣金比率 如：0.45, ',
-  `total_commission_fee` decimal(20,6) DEFAULT NULL COMMENT '佣金金额 如：0.00 ',
-  `subsidy_fee` decimal(20,6) DEFAULT NULL COMMENT '补贴金额 如：0.00',
-  `subsidy_rate` decimal(20,6) DEFAULT NULL COMMENT '补贴比率 如：0.00',
+  `alipay_total_price` decimal(20,2) DEFAULT NULL COMMENT '付款金额 如：46.56',
+  `total_commission_rate` decimal(20,2) DEFAULT NULL COMMENT '佣金比率 如：0.45, ',
+  `total_commission_fee` decimal(20,2) DEFAULT NULL COMMENT '佣金金额 如：0.00 ',
+  `subsidy_fee` decimal(20,2) DEFAULT NULL COMMENT '补贴金额 如：0.00',
+  `subsidy_rate` decimal(20,2) DEFAULT NULL COMMENT '补贴比率 如：0.00',
   `subsidy_type` varchar(500) DEFAULT NULL COMMENT '补贴类型 如：--',
-  `income_rate` decimal(20,6) DEFAULT NULL COMMENT '收入比率 如：0.45',
-  `pub_share_rate` decimal(20,6) DEFAULT NULL COMMENT '分成比率 如：100.00, ',
-  `tk_total_rate` decimal(20,6) DEFAULT NULL COMMENT '提成百分比 如：0.45, ',
-  `tk_commission_rate_for_media_platform` decimal(20,6) DEFAULT NULL COMMENT '技术服务费率 如：0.00',
-  `tk_commission_fee_for_media_platform` decimal(20,6) DEFAULT NULL COMMENT '技术服务费 如：0.00, ',
-  `pub_share_pre_fee` decimal(20,6) DEFAULT NULL COMMENT '付款预估收入 如：0.21, ',
-  `tk_commission_pre_fee_for_media_platform` decimal(20,6) DEFAULT NULL COMMENT '结算预估收入 如：0.00',
+  `income_rate` decimal(20,2) DEFAULT NULL COMMENT '收入比率 如：0.45',
+  `pub_share_rate` decimal(20,2) DEFAULT NULL COMMENT '分成比率 如：100.00, ',
+  `tk_total_rate` decimal(20,2) DEFAULT NULL COMMENT '提成百分比 如：0.45, ',
+  `tk_commission_rate_for_media_platform` decimal(20,2) DEFAULT NULL COMMENT '技术服务费率 如：0.00',
+  `tk_commission_fee_for_media_platform` decimal(20,2) DEFAULT NULL COMMENT '技术服务费 如：0.00, ',
+  `pub_share_pre_fee` decimal(20,2) DEFAULT NULL COMMENT '付款预估收入 如：0.21, ',
+  `tk_commission_pre_fee_for_media_platform` decimal(20,2) DEFAULT NULL COMMENT '结算预估收入 如：0.00',
   `tk_order_role_text` varchar(50) DEFAULT NULL COMMENT '推广者身份 如："二方", ',
   `tk_order_role` int(11) DEFAULT NULL COMMENT '推广者身份值推广者身份值 如：2',
   `terminal_type` varchar(50) DEFAULT NULL COMMENT '成交平台 如："无线", ',
-  `pub_share_fee` decimal(20,6) DEFAULT NULL COMMENT '分享费率 如：0.00',
+  `pub_share_fee` decimal(20,2) DEFAULT NULL COMMENT '分享费率 如：0.00',
   `tk_deposit_time` varchar(50) DEFAULT NULL COMMENT '保证时间 如：--',
-  `alimama_rate` decimal(20,6) DEFAULT NULL COMMENT '啊里妈妈费率 如：0.00',
-  `alimama_share_fee` decimal(20,6) DEFAULT NULL COMMENT '啊里妈妈费用 如：0.00',
-  `deposit_price` decimal(20,6) DEFAULT NULL COMMENT '保证价格 如：0.00',
+  `alimama_rate` decimal(20,2) DEFAULT NULL COMMENT '啊里妈妈费率 如：0.00',
+  `alimama_share_fee` decimal(20,2) DEFAULT NULL COMMENT '啊里妈妈费用 如：0.00',
+  `deposit_price` decimal(20,2) DEFAULT NULL COMMENT '保证价格 如：0.00',
   `tb_deposit_time` varchar(50) DEFAULT NULL COMMENT '保证时间 如：--',
   `item_platform_type_text` varchar(50) DEFAULT NULL COMMENT '平台类型 如："淘宝"',
   `refund_tag` int(11) DEFAULT NULL COMMENT '退款标识 如：0',
