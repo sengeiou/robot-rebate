@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-08-22 23:41:26
+Date: 2020-09-05 15:54:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1675,7 +1675,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1598110747814', '1598110822145', '10000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('MyScheduler', 'vcc-PC1599291555693', '1599291982949', '10000');
 
 -- ----------------------------
 -- Table structure for `qrtz_simple_triggers`
@@ -3820,6 +3820,18 @@ INSERT INTO `sys_log` VALUES ('1297073747154173953', '2', '机器人-分页列�
 INSERT INTO `sys_log` VALUES ('1297074738184323074', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@71f496f8', null, '15', 'admin', '2020-08-22 15:34:51', null, null);
 INSERT INTO `sys_log` VALUES ('1297074743985045505', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@1b3224e3', null, '6', 'admin', '2020-08-22 15:34:52', null, null);
 INSERT INTO `sys_log` VALUES ('1297074864458039298', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@721ab97c', null, '8', 'admin', '2020-08-22 15:35:21', null, null);
+INSERT INTO `sys_log` VALUES ('1297377863508299777', '1', '用户名: 管理员,退出成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-08-23 11:39:21', null, null);
+INSERT INTO `sys_log` VALUES ('1297378855104679938', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-08-23 11:43:18', null, null);
+INSERT INTO `sys_log` VALUES ('1297378889439252481', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@3792dbc5', null, '208', 'admin', '2020-08-23 11:43:26', null, null);
+INSERT INTO `sys_log` VALUES ('1297379631726202881', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@862cc22', null, '16', 'admin', '2020-08-23 11:46:23', null, null);
+INSERT INTO `sys_log` VALUES ('1297381708116398082', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@250d6955', null, '37', 'admin', '2020-08-23 11:54:38', null, null);
+INSERT INTO `sys_log` VALUES ('1297383405555421185', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@3d6d7104', null, '14', 'admin', '2020-08-23 12:01:23', null, null);
+INSERT INTO `sys_log` VALUES ('1297383430498947074', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@67a729ef', null, '20', 'admin', '2020-08-23 12:01:29', null, null);
+INSERT INTO `sys_log` VALUES ('1302149683491102722', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, null, '2020-09-05 15:40:52', null, null);
+INSERT INTO `sys_log` VALUES ('1302149704638783490', '2', '机器人-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatRobotController.queryPageList()', null, '  wechatRobot: WechatRobot(id=null, wxid=null, nickname=null, headUrl=null, backgroundUrl=null, signature=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@195661b9', null, '131', 'admin', '2020-09-05 15:40:57', null, null);
+INSERT INTO `sys_log` VALUES ('1302149730366644226', '2', '微信用户-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.WechatUserController.queryPageList()', null, '  wechatUser: WechatUser(id=null, wxid=null, robotWxid=null, state=null, source=null, nickname=null, note=null, sex=null, headUrl=null, inviteWxid=null, regMessage=null, createTime=null, createBy=null, updateTime=null, updateBy=null, syncTime=null, pid=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@45ca20ac', null, '20', 'admin', '2020-09-05 15:41:03', null, null);
+INSERT INTO `sys_log` VALUES ('1302150943086731265', '2', '推广位-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkSpreadController.queryPageList()', null, '  tbkSpread: TbkSpread(id=null, pid=null, pubId=null, siteId=null, adzoneId=null, adzoneName=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@5adce94b', null, '12', 'admin', '2020-09-05 15:45:52', null, null);
+INSERT INTO `sys_log` VALUES ('1302150956147793922', '2', '淘宝客订单-分页列表查询', '1', 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.robot.controller.TbkTradeController.queryPageList()', null, '  tbkTrade: TbkTrade(id=null, tradeId=null, tradeParentId=null, clickTime=null, tkCreateTime=null, tbPaidTime=null, tkPaidTime=null, tkStatusText=null, tkStatus=null, itemId=null, itemImg=null, itemLink=null, itemTitle=null, itemNum=null, itemPrice=null, itemCategoryName=null, sellerNick=null, sellerShopTitle=null, pid=null, pubId=null, siteId=null, siteName=null, adzoneId=null, adzoneName=null, orderType=null, alipayTotalPrice=null, totalCommissionRate=null, totalCommissionFee=null, subsidyFee=null, subsidyRate=null, subsidyType=null, incomeRate=null, pubShareRate=null, tkTotalRate=null, tkCommissionRateForMediaPlatform=null, tkCommissionFeeForMediaPlatform=null, pubSharePreFee=null, tkCommissionPreFeeForMediaPlatform=null, tkOrderRoleText=null, tkOrderRole=null, terminalType=null, pubShareFee=null, tkDepositTime=null, alimamaRate=null, alimamaShareFee=null, depositPrice=null, tbDepositTime=null, itemPlatformTypeText=null, refundTag=null, preSell=null, tkBizTag=null, flowSource=null, supportItemClick=null, createTime=null, createBy=null, updateTime=null, updateBy=null)  pageNo: 1  pageSize: 10  req: org.apache.shiro.web.servlet.ShiroHttpServletRequest@29544670', null, '16', 'admin', '2020-09-05 15:45:55', null, null);
 
 -- ----------------------------
 -- Table structure for `sys_permission`
@@ -3901,6 +3913,8 @@ INSERT INTO `sys_permission` VALUES ('1280464606292099074', '2a470fc0c3954d9dbb6
 INSERT INTO `sys_permission` VALUES ('1296474375928418306', null, '机器人', '/robot', 'layouts/RouteView', null, null, '0', null, '1', '1.00', '0', 'android', '1', '0', '0', '0', null, 'admin', '2020-08-20 23:49:13', null, null, '0', '0', '1', '0');
 INSERT INTO `sys_permission` VALUES ('1296475035931512833', '1296474375928418306', '机器人管理', '/robot/wechatRobot', 'robot/wechatRobot/WechatRobotList', null, null, '1', null, '1', '1.00', '0', 'android', '1', '1', '0', '0', null, 'admin', '2020-08-20 23:51:51', null, null, '0', '0', '1', '0');
 INSERT INTO `sys_permission` VALUES ('1297031452409217025', '1296474375928418306', '微信用户', '/robot/wechatUser', 'robot/wechatUser/WechatUserList', null, null, '1', null, '1', '2.00', '0', 'wechat', '1', '1', '0', '0', null, 'admin', '2020-08-22 12:42:51', null, null, '0', '0', '1', '0');
+INSERT INTO `sys_permission` VALUES ('1302150424846917634', '1296474375928418306', '推广位', '/robot/tbkSpread', 'robot/tbkSpread/TbkSpreadList', null, null, '1', null, '1', '3.00', '0', 'cluster', '1', '1', '0', '0', null, 'admin', '2020-09-05 15:43:49', null, null, '0', '0', '1', '0');
+INSERT INTO `sys_permission` VALUES ('1302150834248736770', '1296474375928418306', '淘宝客订单', '/robot/tbkTrade', 'robot/tbkTrade/TbkTradeList', null, null, '1', null, '1', '4.00', '0', 'taobao', '1', '1', '0', '0', null, 'admin', '2020-09-05 15:45:26', null, null, '0', '0', '1', '0');
 INSERT INTO `sys_permission` VALUES ('13212d3416eb690c2e1d5033166ff47a', '2e42e3835c2b44ec9f7bc26c146ee531', '失败', '/result/fail', 'result/Error', null, null, '1', null, null, '2.00', null, null, '1', '1', null, null, null, null, '2018-12-25 20:34:38', null, null, '0', '0', null, null);
 INSERT INTO `sys_permission` VALUES ('1367a93f2c410b169faa7abcbad2f77c', '6e73eb3c26099c191bf03852ee1310a1', '基本设置', '/account/settings/BaseSetting', 'account/settings/BaseSetting', 'account-settings-base', null, '1', 'BaseSettings', null, null, '0', null, '1', '1', null, '1', null, null, '2018-12-26 18:58:35', 'admin', '2019-03-20 12:57:31', '0', '0', null, null);
 INSERT INTO `sys_permission` VALUES ('190c2b43bec6a5f7a4194a85db67d96a', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '角色管理', '/isystem/roleUserList', 'system/RoleUserList', null, null, '1', null, null, '1.20', '0', null, '1', '1', '0', '0', null, 'admin', '2019-04-17 15:13:56', 'admin', '2019-12-25 09:36:31', '0', '0', null, '0');
@@ -4181,6 +4195,8 @@ INSERT INTO `sys_role_permission` VALUES ('1281494684632473602', 'f6817f48af4fb3
 INSERT INTO `sys_role_permission` VALUES ('1296475135785308162', 'f6817f48af4fb3af11b9e8bf182f618b', '1296474375928418306', null, '2020-08-20 23:52:14', '127.0.0.1');
 INSERT INTO `sys_role_permission` VALUES ('1296475135802085378', 'f6817f48af4fb3af11b9e8bf182f618b', '1296475035931512833', null, '2020-08-20 23:52:14', '127.0.0.1');
 INSERT INTO `sys_role_permission` VALUES ('1297031518410784769', 'f6817f48af4fb3af11b9e8bf182f618b', '1297031452409217025', null, '2020-08-22 12:43:06', '127.0.0.1');
+INSERT INTO `sys_role_permission` VALUES ('1302150903656079361', 'f6817f48af4fb3af11b9e8bf182f618b', '1302150834248736770', null, '2020-09-05 15:45:43', '127.0.0.1');
+INSERT INTO `sys_role_permission` VALUES ('1302150903668662274', 'f6817f48af4fb3af11b9e8bf182f618b', '1302150424846917634', null, '2020-09-05 15:45:43', '127.0.0.1');
 INSERT INTO `sys_role_permission` VALUES ('145eac8dd88eddbd4ce0a800ab40a92c', 'e51758fa916c881624b046d26bd09230', '08e6b9dc3c04489c8e1ff2ce6f105aa4', null, null, null);
 INSERT INTO `sys_role_permission` VALUES ('154edd0599bd1dc2c7de220b489cd1e2', 'f6817f48af4fb3af11b9e8bf182f618b', '7ac9eb9ccbde2f7a033cd4944272bf1e', null, null, null);
 INSERT INTO `sys_role_permission` VALUES ('165acd6046a0eaf975099f46a3c898ea', 'f6817f48af4fb3af11b9e8bf182f618b', '4f66409ef3bbd69c1d80469d6e2a885e', null, null, null);
@@ -4733,6 +4749,103 @@ INSERT INTO `sys_user_role` VALUES ('1281490128242597889', 'e9ca23d68d884d4ebb19
 INSERT INTO `sys_user_role` VALUES ('1256487299962728449', 'f0019fdebedb443c98dcb17d88222c38', 'ee8626f80f7c2619917b6236f3a7f02b');
 
 -- ----------------------------
+-- Table structure for `tbk_spread`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbk_spread`;
+CREATE TABLE `tbk_spread` (
+  `id` varchar(36) NOT NULL COMMENT '主键',
+  `pid` varchar(100) NOT NULL COMMENT 'Pid,如:mm_1106390200_1962050151_110732600234',
+  `pub_id` bigint(20) NOT NULL COMMENT '产品ID,如：1106390200',
+  `site_id` bigint(20) NOT NULL COMMENT '媒体ID,如：1962050151',
+  `adzone_id` bigint(20) NOT NULL COMMENT '推广位ID',
+  `adzone_name` varchar(100) DEFAULT NULL COMMENT '推广位名称',
+  `create_time` datetime NOT NULL COMMENT '注册时间',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '修改者',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_tbk_spread_key` (`pid`),
+  KEY `idx_tbk_spread_site_id` (`site_id`) USING BTREE,
+  KEY `idx_tbk_spread_adzone_id` (`adzone_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='推广位';
+
+-- ----------------------------
+-- Records of tbk_spread
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbk_trade`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbk_trade`;
+CREATE TABLE `tbk_trade` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
+  `trade_id` bigint(20) DEFAULT NULL COMMENT '淘宝子订单编号',
+  `trade_parent_id` bigint(20) DEFAULT NULL COMMENT '淘宝订单编号',
+  `click_time` datetime DEFAULT NULL COMMENT '点击时间',
+  `tk_create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `tb_paid_time` datetime DEFAULT NULL COMMENT '淘宝付款时间',
+  `tk_paid_time` datetime DEFAULT NULL COMMENT '付款时间',
+  `tk_status_text` varchar(50) DEFAULT NULL COMMENT '订单状态',
+  `tk_status` int(11) DEFAULT NULL COMMENT '订单状态值==>12:已付款;14:已收货;3: 已结算;13:已失效;',
+  `item_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `item_img` varchar(300) DEFAULT NULL COMMENT '商品图片',
+  `item_link` varchar(300) DEFAULT NULL COMMENT '商品链接',
+  `item_title` varchar(200) DEFAULT NULL COMMENT '商品标题',
+  `item_num` int(11) DEFAULT NULL COMMENT '商品数量',
+  `item_price` decimal(20,6) DEFAULT NULL COMMENT '商品单价',
+  `item_category_name` varchar(200) DEFAULT NULL COMMENT '类目名称,如："电子/电工"',
+  `seller_nick` varchar(200) DEFAULT NULL COMMENT '掌柜旺旺',
+  `seller_shop_title` varchar(200) DEFAULT NULL COMMENT '店铺名称',
+  `pid` varchar(100) DEFAULT NULL COMMENT 'Pid,如:mm_1106390200_1962050151_110732600234',
+  `pub_id` bigint(20) DEFAULT NULL COMMENT '产品ID,如：1106390200',
+  `site_id` bigint(20) DEFAULT NULL COMMENT '媒体ID,如：1962050151',
+  `site_name` varchar(100) DEFAULT NULL COMMENT '媒体名称,如："Simple.Chen"',
+  `adzone_id` bigint(20) DEFAULT NULL COMMENT '推广位ID,如：110732600234',
+  `adzone_name` varchar(100) DEFAULT NULL COMMENT '推广位名称,如："薇家雅适"',
+  `order_type` varchar(50) DEFAULT NULL COMMENT '订单类型 如："淘宝"',
+  `alipay_total_price` decimal(20,6) DEFAULT NULL COMMENT '付款金额 如：46.56',
+  `total_commission_rate` decimal(20,6) DEFAULT NULL COMMENT '佣金比率 如：0.45, ',
+  `total_commission_fee` decimal(20,6) DEFAULT NULL COMMENT '佣金金额 如：0.00 ',
+  `subsidy_fee` decimal(20,6) DEFAULT NULL COMMENT '补贴金额 如：0.00',
+  `subsidy_rate` decimal(20,6) DEFAULT NULL COMMENT '补贴比率 如：0.00',
+  `subsidy_type` varchar(500) DEFAULT NULL COMMENT '补贴类型 如：--',
+  `income_rate` decimal(20,6) DEFAULT NULL COMMENT '收入比率 如：0.45',
+  `pub_share_rate` decimal(20,6) DEFAULT NULL COMMENT '分成比率 如：100.00, ',
+  `tk_total_rate` decimal(20,6) DEFAULT NULL COMMENT '提成百分比 如：0.45, ',
+  `tk_commission_rate_for_media_platform` decimal(20,6) DEFAULT NULL COMMENT '技术服务费率 如：0.00',
+  `tk_commission_fee_for_media_platform` decimal(20,6) DEFAULT NULL COMMENT '技术服务费 如：0.00, ',
+  `pub_share_pre_fee` decimal(20,6) DEFAULT NULL COMMENT '付款预估收入 如：0.21, ',
+  `tk_commission_pre_fee_for_media_platform` decimal(20,6) DEFAULT NULL COMMENT '结算预估收入 如：0.00',
+  `tk_order_role_text` varchar(50) DEFAULT NULL COMMENT '推广者身份 如："二方", ',
+  `tk_order_role` int(11) DEFAULT NULL COMMENT '推广者身份值推广者身份值 如：2',
+  `terminal_type` varchar(50) DEFAULT NULL COMMENT '成交平台 如："无线", ',
+  `pub_share_fee` decimal(20,6) DEFAULT NULL COMMENT '分享费率 如：0.00',
+  `tk_deposit_time` varchar(50) DEFAULT NULL COMMENT '保证时间 如：--',
+  `alimama_rate` decimal(20,6) DEFAULT NULL COMMENT '啊里妈妈费率 如：0.00',
+  `alimama_share_fee` decimal(20,6) DEFAULT NULL COMMENT '啊里妈妈费用 如：0.00',
+  `deposit_price` decimal(20,6) DEFAULT NULL COMMENT '保证价格 如：0.00',
+  `tb_deposit_time` varchar(50) DEFAULT NULL COMMENT '保证时间 如：--',
+  `item_platform_type_text` varchar(50) DEFAULT NULL COMMENT '平台类型 如："淘宝"',
+  `refund_tag` int(11) DEFAULT NULL COMMENT '退款标识 如：0',
+  `pre_sell` int(11) DEFAULT NULL COMMENT '预售 如：0',
+  `tk_biz_tag` int(11) DEFAULT NULL COMMENT '业务标识 如：1',
+  `flow_source` varchar(50) DEFAULT NULL COMMENT '来源 如：--',
+  `support_item_click` tinyint(1) DEFAULT NULL COMMENT '商品是否点击 如：true',
+  `create_time` datetime NOT NULL COMMENT '注册时间',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '修改者',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_tbk_trade_key` (`trade_id`),
+  KEY `idx_tbk_trade_item_id` (`item_id`),
+  KEY `idx_tbk_trade_pid` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='淘宝客订单';
+
+-- ----------------------------
+-- Records of tbk_trade
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `test_demo`
 -- ----------------------------
 DROP TABLE IF EXISTS `test_demo`;
@@ -4983,6 +5096,7 @@ CREATE TABLE `wechat_robot` (
 -- Records of wechat_robot
 -- ----------------------------
 INSERT INTO `wechat_robot` VALUES ('1297194630611144706', 'csp961096506', 'Simple.Chen', 'http://wx.qlogo.cn/mmhead/ver_1/I31pBs2r5nKHibJSktYHVhwbtK7hOCTGtEkmvoynmzZJ8loHXx6Nicgm8DGp5UylicyXA4VGFFAIfhFRJFv6qjO0w/132', 'http://szmmsns.qpic.cn/mmsns/zba019qazGp2XMEcUgtYyPCJLmV3CIy530ekibEupe5vDSCxekqEIWnEn3qictq4NVkmUgAKwhqHo/0', '未来', '2020-08-22 23:31:15', null, null, null, '2020-08-22 23:31:15');
+INSERT INTO `wechat_robot` VALUES ('1298209864385740801', 'wxid_xu97ppnheq5j22', '缘与份', 'http://wx.qlogo.cn/mmhead/ver_1/hibrIRFZ56HKI1IJP7ExcSTac8LURD8jvT2AALpFrS4pXDjuhc1nLf39lfm70I1YFwica8PtbGAsNM0duGPbNYE85jSc7DDn7b4XeZYSmnibzI/132', 'http://szmmsns.qpic.cn/mmsns/LBUHKlmBY4MZYJ058RCu7NGjlxEvpTicjFMs8FEXF3PnGUJ87vEV0iaicCTmiaH5ZEtxElpE7E9dIvg/0', '与你缘一起，今生无悔~', '2020-08-25 18:45:26', null, null, null, '2020-08-25 18:45:26');
 
 -- ----------------------------
 -- Table structure for `wechat_user`
@@ -5005,11 +5119,12 @@ CREATE TABLE `wechat_user` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(50) DEFAULT NULL COMMENT '修改者',
   `sync_time` datetime NOT NULL COMMENT '同步时间(和系统时间一致)',
+  `pid` varchar(100) NOT NULL COMMENT 'Pid,如:mm_1106390200_1962050151_110732600234',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_wechat_user_key` (`wxid`,`robot_wxid`)
+  UNIQUE KEY `idx_wechat_user_key` (`wxid`,`robot_wxid`),
+  KEY `idx_wechat_user_pid` (`pid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信用户';
 
 -- ----------------------------
 -- Records of wechat_user
 -- ----------------------------
-INSERT INTO `wechat_user` VALUES ('1297194635883384834', 'wxid_g3xnklexyaj722', 'csp961096506', '0', '1', '小妮子saly', '微小小', '0', null, null, null, '2020-08-22 23:31:17', null, '2020-08-22 23:32:39', null, '2020-08-22 23:32:39');
