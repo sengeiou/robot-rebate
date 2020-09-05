@@ -1,19 +1,16 @@
 package org.jeecg.modules.robot.entity;
 
-import java.io.Serializable;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @Description: 淘宝客订单
@@ -31,15 +28,15 @@ public class TbkTrade {
 	/**订单ID*/
 	@TableId(type = IdType.ID_WORKER_STR)
     @ApiModelProperty(value = "订单ID")
-	private java.lang.Integer id;
+	private java.lang.Long id;
 	/**淘宝子订单编号*/
 	@Excel(name = "淘宝子订单编号", width = 15)
     @ApiModelProperty(value = "淘宝子订单编号")
-	private java.lang.Integer tradeId;
+	private java.lang.Long tradeId;
 	/**淘宝订单编号*/
 	@Excel(name = "淘宝订单编号", width = 15)
     @ApiModelProperty(value = "淘宝订单编号")
-	private java.lang.Integer tradeParentId;
+	private java.lang.Long tradeParentId;
 	/**点击时间*/
 	@Excel(name = "点击时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
@@ -75,7 +72,7 @@ public class TbkTrade {
 	/**商品ID*/
 	@Excel(name = "商品ID", width = 15)
     @ApiModelProperty(value = "商品ID")
-	private java.lang.Integer itemId;
+	private java.lang.Long itemId;
 	/**商品图片*/
 	@Excel(name = "商品图片", width = 15)
     @ApiModelProperty(value = "商品图片")
@@ -115,11 +112,11 @@ public class TbkTrade {
 	/**产品ID*/
 	@Excel(name = "产品ID", width = 15)
     @ApiModelProperty(value = "产品ID")
-	private java.lang.Integer pubId;
+	private java.lang.Long pubId;
 	/**媒体ID*/
 	@Excel(name = "媒体ID", width = 15)
     @ApiModelProperty(value = "媒体ID")
-	private java.lang.Integer siteId;
+	private java.lang.Long siteId;
 	/**媒体名称*/
 	@Excel(name = "媒体名称", width = 15)
     @ApiModelProperty(value = "媒体名称")
@@ -127,7 +124,7 @@ public class TbkTrade {
 	/**推广位ID*/
 	@Excel(name = "推广位ID", width = 15)
     @ApiModelProperty(value = "推广位ID")
-	private java.lang.Integer adzoneId;
+	private java.lang.Long adzoneId;
 	/**推广位名称*/
 	@Excel(name = "推广位名称", width = 15)
     @ApiModelProperty(value = "推广位名称")
@@ -195,7 +192,7 @@ public class TbkTrade {
 	/**推广者身份值*/
 	@Excel(name = "推广者身份值", width = 15)
     @ApiModelProperty(value = "推广者身份值")
-	private java.lang.Integer tkOrderRole;
+	private java.lang.Long tkOrderRole;
 	/**成交平台*/
 	@Excel(name = "成交平台", width = 15)
     @ApiModelProperty(value = "成交平台")
@@ -247,7 +244,7 @@ public class TbkTrade {
 	/**商品是否点击*/
 	@Excel(name = "商品是否点击", width = 15)
     @ApiModelProperty(value = "商品是否点击")
-	private java.lang.Integer supportItemClick;
+	private java.lang.Long supportItemClick;
 	/**注册时间*/
 	@Excel(name = "注册时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")

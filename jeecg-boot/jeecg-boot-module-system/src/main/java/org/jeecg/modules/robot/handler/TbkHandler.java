@@ -34,6 +34,8 @@ public class TbkHandler {
     private static final String url = "http://gw.api.taobao.com/router/rest";
     private static final String appkey = "30924975";
     private static final String secret = "a3f0c2dd9e153a7ac743322493f88091";
+    private static final Long PUB_ID = 1106390200L;
+    private static final Long SITE_ID = 1962050151L;
     private static TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 
     @Autowired
@@ -191,7 +193,7 @@ public class TbkHandler {
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         body.add("tag", "29");
-        body.add("recordId", "1962050151");
+        body.add("recordId", SITE_ID.toString());
         body.add("reqParams", "{\"adzoneName\":\"" + adzoneName + "\"}");
         body.add("sceneCode", "adzone_common");
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
@@ -203,6 +205,8 @@ public class TbkHandler {
         if (null == obj || null == obj.getResult() || obj.getResult() == false) {
             throw new RuntimeException("！！！添加推广拉失败");
         }
+        obj.setSiteId(SITE_ID);
+        obj.setPubId(PUB_ID);
         log.info("添加推广位结果:{}", obj);
         return obj;
     }
@@ -242,9 +246,6 @@ public class TbkHandler {
      */
     public TbOrderPage getTbOrderPage(TbOrderPageSearch search) throws Exception{
         Objects.requireNonNull(search, "！！！搜索条件不能为空");
-        if(null == search.getStartTime()){
-            search.setStartTime(TbOrderPageSearch.defaultStartTime());
-        }
 
         TbSession session = tbkLoginHandler.login();
         if(null == session){

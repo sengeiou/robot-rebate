@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 搜索订单
@@ -15,6 +15,8 @@ import java.util.Date;
 @Setter
 @Getter
 public class TbOrderPageSearch {
+    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private int queryType = 2; // 1:创建时间;2:付款时间;3:结算时间
     private String startTime; // 设置默认最小值
     private String endTime;
@@ -25,16 +27,18 @@ public class TbOrderPageSearch {
     private int pageSize = 40; // 一页显示几条
 
     public static String defaultStartTime() {
-        Calendar calendar = Calendar.getInstance(); //得到日历
-        calendar.setTime(new Date());//把当前时间赋给日历
-        calendar.add(Calendar.MONTH, -3);  //设置为前3月
-        calendar.add(Calendar.DATE, 2); // 加2天
-        Date dBefore = calendar.getTime();   //得到前3月的时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //设置时间格式
-        return sdf.format(dBefore);    //格式化前3月的时间
+        LocalDate stime = LocalDate.now().plus(-3, ChronoUnit.MONTHS)
+                .plus(2,ChronoUnit.DAYS);
+        return df.format(stime);    //格式化前3月的时间
+    }
+
+    public static String defaultEndTime() {
+        return df.format(LocalDate.now());
     }
 
     public String getParams() {
+        startTime = null != startTime ? startTime : defaultStartTime();
+        endTime = null != endTime ? endTime : defaultEndTime();
         return "&pageNo=" + pageNo
                 + "&startTime=" + startTime
                 + "&endTime=" + endTime

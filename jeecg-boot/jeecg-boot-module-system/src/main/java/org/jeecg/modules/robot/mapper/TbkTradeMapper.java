@@ -1,10 +1,10 @@
 package org.jeecg.modules.robot.mapper;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.jeecg.modules.robot.entity.TbkTrade;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * @Description: 淘宝客订单
@@ -14,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TbkTradeMapper extends BaseMapper<TbkTrade> {
 
+    void inserReplaceBatch(@Param("tradeList") List<TbkTrade> tradeList);
 }

@@ -8,6 +8,7 @@ import org.jeecg.modules.robot.entity.WxReceive;
 import org.jeecg.modules.robot.filter.IWxFilterHandler;
 import org.jeecg.modules.robot.handler.TbkHandler;
 import org.jeecg.modules.robot.handler.WecharHandler;
+import org.jeecg.modules.robot.service.ITbkSpreadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,9 @@ public class RobotController {
 
 	@Autowired
 	private TbkHandler tbkHandler;
+
+	@Autowired
+	private ITbkSpreadService tbkSpreadService;
 
 
 	@ResponseBody
@@ -99,6 +103,10 @@ public class RobotController {
 				TbOrderPageSearch search = new TbOrderPageSearch();
 				search.setEndTime(val);
 				tbkHandler.getTbOrderPage(search);
+				break;
+			case "autoBatchAdd": // 自动批量添加推广位
+				int topCount = Integer.valueOf(val);
+				tbkSpreadService.autoBatchAdd(topCount);
 				break;
 		}
 		return result;

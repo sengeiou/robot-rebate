@@ -1,19 +1,16 @@
 package org.jeecg.modules.robot.entity;
 
-import java.io.Serializable;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @Description: 推广位
@@ -39,15 +36,15 @@ public class TbkSpread {
 	/**产品ID*/
 	@Excel(name = "产品ID", width = 15)
     @ApiModelProperty(value = "产品ID")
-	private java.lang.Integer pubId;
+	private java.lang.Long pubId;
 	/**媒体ID*/
 	@Excel(name = "媒体ID", width = 15)
     @ApiModelProperty(value = "媒体ID")
-	private java.lang.Integer siteId;
+	private java.lang.Long siteId;
 	/**推广位ID*/
 	@Excel(name = "推广位ID", width = 15)
     @ApiModelProperty(value = "推广位ID")
-	private java.lang.Integer adzoneId;
+	private java.lang.Long adzoneId;
 	/**推广位名称*/
 	@Excel(name = "推广位名称", width = 15)
     @ApiModelProperty(value = "推广位名称")
