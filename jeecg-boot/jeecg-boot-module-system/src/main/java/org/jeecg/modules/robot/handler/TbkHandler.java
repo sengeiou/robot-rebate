@@ -197,11 +197,11 @@ public class TbkHandler {
         body.add("reqParams", "{\"adzoneName\":\"" + adzoneName + "\"}");
         body.add("sceneCode", "adzone_common");
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
-        ResponseEntity<TbResult> responseEntity = restTemplate.postForEntity(uul, httpEntity, TbResult.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(uul, httpEntity, String.class);
 
         // 处理返回信息
-        TbResult.throwInvalid(responseEntity);
-        TbAdzone obj = responseEntity.getBody().getData().toJavaObject(TbAdzone.class);
+        TbResult result = TbResult.throwInvalid(responseEntity);
+        TbAdzone obj = result.getData().toJavaObject(TbAdzone.class);
         if (null == obj || null == obj.getResult() || obj.getResult() == false) {
             throw new RuntimeException("！！！添加推广拉失败");
         }
@@ -233,11 +233,10 @@ public class TbkHandler {
         body.add("adzoneIds", adzoneIds);
         body.add("sceneCode","adzone_common");
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
-        ResponseEntity<TbResult> responseEntity = restTemplate.postForEntity(uul, httpEntity, TbResult.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(uul, httpEntity, String.class);
 
-        TbResult.throwInvalid(responseEntity);
-        TbResult str = responseEntity.getBody();
-        log.info("批量删除推广位:{}", str);
+        TbResult result = TbResult.throwInvalid(responseEntity);
+        log.info("批量删除推广位:{}", result);
     }
 
 
@@ -261,11 +260,11 @@ public class TbkHandler {
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(body, header);
-        ResponseEntity<TbResult> responseEntity = restTemplate.postForEntity(uul, httpEntity, TbResult.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(uul, httpEntity, String.class);
 
-        TbResult.throwInvalid(responseEntity);
+        TbResult result = TbResult.throwInvalid(responseEntity);
 
-        TbOrderPage page = responseEntity.getBody().getData().toJavaObject(TbOrderPage.class);
+        TbOrderPage page = result.getData().toJavaObject(TbOrderPage.class);
 
         log.info("查询淘宝订单信息结果：{}", page);
         return page;
