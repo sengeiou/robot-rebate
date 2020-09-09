@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.robot.mapper.TbkTradeMapper">
     <insert id="inserReplaceBatch">
-        REPLACE INTO `tbk_trade`(
+        INSERT INTO `tbk_trade`(
             `id`,
             `trade_id`,
             `trade_parent_id`,
@@ -123,5 +123,59 @@
         #{trade.updateBy}
         )
         </foreach>
+        ON DUPLICATE KEY UPDATE
+        trade_parent_id = VALUES(`trade_parent_id`),
+        click_time = VALUES(`click_time`),
+        tk_create_time = VALUES(`tk_create_time`),
+        tb_paid_time = VALUES(`tb_paid_time`),
+        tk_paid_time = VALUES(`tk_paid_time`),
+        tk_status_text = VALUES(`tk_status_text`),
+        tk_status = VALUES(`tk_status`),
+        item_id = VALUES(`item_id`),
+        item_img = VALUES(`item_img`),
+        item_link = VALUES(`item_link`),
+        item_title = VALUES(`item_title`),
+        item_num = VALUES(`item_num`),
+        item_price = VALUES(`item_price`),
+        item_category_name = VALUES(`item_category_name`),
+        seller_nick = VALUES(`seller_nick`),
+        seller_shop_title = VALUES(`seller_shop_title`),
+        pid = VALUES(`pid`),
+        pub_id = VALUES(`pub_id`),
+        site_id = VALUES(`site_id`),
+        site_name = VALUES(`site_name`),
+        adzone_id = VALUES(`adzone_id`),
+        adzone_name = VALUES(`adzone_name`),
+        order_type = VALUES(`order_type`),
+        alipay_total_price = VALUES(`alipay_total_price`),
+        total_commission_rate = VALUES(`total_commission_rate`),
+        total_commission_fee = VALUES(`total_commission_fee`),
+        subsidy_fee = VALUES(`subsidy_fee`),
+        subsidy_rate = VALUES(`subsidy_rate`),
+        subsidy_type = VALUES(`subsidy_type`),
+        income_rate = VALUES(`income_rate`),
+        pub_share_rate = VALUES(`pub_share_rate`),
+        tk_total_rate = VALUES(`tk_total_rate`),
+        tk_commission_rate_for_media_platform = VALUES(`tk_commission_rate_for_media_platform`),
+        tk_commission_fee_for_media_platform = VALUES(`tk_commission_fee_for_media_platform`),
+        pub_share_pre_fee = VALUES(`pub_share_pre_fee`),
+        tk_commission_pre_fee_for_media_platform = VALUES(`tk_commission_pre_fee_for_media_platform`),
+        tk_order_role_text = VALUES(`tk_order_role_text`),
+        tk_order_role = VALUES(`tk_order_role`),
+        terminal_type = VALUES(`terminal_type`),
+        pub_share_fee = VALUES(`pub_share_fee`),
+        tk_deposit_time = VALUES(`tk_deposit_time`),
+        alimama_rate = VALUES(`alimama_rate`),
+        alimama_share_fee = VALUES(`alimama_share_fee`),
+        deposit_price = VALUES(`deposit_price`),
+        tb_deposit_time = VALUES(`tb_deposit_time`),
+        item_platform_type_text = VALUES(`item_platform_type_text`),
+        refund_tag = VALUES(`refund_tag`),
+        pre_sell = VALUES(`pre_sell`),
+        tk_biz_tag = VALUES(`tk_biz_tag`),
+        flow_source = VALUES(`flow_source`),
+        support_item_click = VALUES(`support_item_click`),
+        update_time = now(),
+        update_by = VALUES(`update_by`)
     </insert>
 </mapper>
