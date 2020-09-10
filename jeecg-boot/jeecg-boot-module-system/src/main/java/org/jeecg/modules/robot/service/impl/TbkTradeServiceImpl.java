@@ -36,64 +36,39 @@ public class TbkTradeServiceImpl extends ServiceImpl<TbkTradeMapper, TbkTrade> i
     @Override
     public void syncTradesFromTbk() {
         TbOrderPageSearch search = new TbOrderPageSearch();
-        int pageNo = 1;
-        search.setPageNo(pageNo);
+        search.setPageNo(1);
         log.info("搜索条件：{}", search);
-        try {
-            Date now = new Date();
-            TbOrderPage orders = tbkHandler.getTbOrderPage(search);
-            log.info("orders:{}",orders);
-            List<TbOrder> result = orders.getResult();
-            if (!CollectionUtils.isEmpty(result)) {
-                List<TbkTrade> tradeList = new ArrayList<>();
-                result.stream().forEach(r -> {
-                    TbkTrade trade = new TbkTrade();
-                    BeanUtils.copyProperties(r, trade);
-                    trade.setCreateTime(now);
-                    trade.setUpdateTime(now);
-                    tradeList.add(trade);
-                });
-                tbkTradeMapper.inserReplaceBatch(tradeList);
-
-            }
-
-            boolean hasNext = orders.isHasNext();
-            if (hasNext == false) {
-                return;
-            }
-            pageNo ++;
-            search.setPageNo(pageNo);
-            Thread.sleep(1000);
-        } catch (Exception ex) {
-            log.error("查询淘宝客订单列表报错：{}", ex);
-
-        }
-        /*while (true) {
+        boolean stop = false;
+        while(stop == false){
             try {
+                Date now = new Date();
                 TbOrderPage orders = tbkHandler.getTbOrderPage(search);
+                log.info("orders:{}",orders);
                 List<TbOrder> result = orders.getResult();
                 if (!CollectionUtils.isEmpty(result)) {
                     List<TbkTrade> tradeList = new ArrayList<>();
                     result.stream().forEach(r -> {
                         TbkTrade trade = new TbkTrade();
                         BeanUtils.copyProperties(r, trade);
+                        trade.setCreateTime(now);
+                        trade.setUpdateTime(now);
                         tradeList.add(trade);
                     });
-                    saveOrUpdateBatch(tradeList);
+                    tbkTradeMapper.inserReplaceBatch(tradeList);
                 }
 
                 boolean hasNext = orders.isHasNext();
                 if (hasNext == false) {
-                    break;
+                    stop = true;
+                    continue;
                 }
-                pageNo ++;
-                search.setPageNo(pageNo);
+                search.setPageNo(search.getPageNo() + 1);
                 Thread.sleep(1000);
             } catch (Exception ex) {
                 log.error("查询淘宝客订单列表报错：{}", ex);
-                break;
+                stop = true;
             }
-        }*/
+        }
         log.info("--------------------------------------------->");
     }
 

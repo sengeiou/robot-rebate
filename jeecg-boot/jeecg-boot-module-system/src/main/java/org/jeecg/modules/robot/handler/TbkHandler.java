@@ -34,8 +34,8 @@ public class TbkHandler {
     private static final String url = "http://gw.api.taobao.com/router/rest";
     private static final String appkey = "30924975";
     private static final String secret = "a3f0c2dd9e153a7ac743322493f88091";
-    private static final Long PUB_ID = 1106390200L;
-    private static final Long SITE_ID = 1962050151L;
+    public static final Long PUB_ID = 1106390200L;
+    public static final Long SITE_ID = 1962050151L;
     private static TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 
     @Autowired
