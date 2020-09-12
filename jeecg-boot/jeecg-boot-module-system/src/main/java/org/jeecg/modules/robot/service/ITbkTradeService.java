@@ -10,7 +10,8 @@ import org.jeecg.modules.robot.entity.TbkTrade;
  * @Version: V1.0
  */
 public interface ITbkTradeService extends IService<TbkTrade> {
-
+    /**
+     * 同步淘宝客订单
+     */
     void syncTradesFromTbk();
-
 }

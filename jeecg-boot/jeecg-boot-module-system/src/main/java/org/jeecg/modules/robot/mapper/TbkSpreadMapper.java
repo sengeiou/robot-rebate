@@ -1,10 +1,7 @@
 package org.jeecg.modules.robot.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-import org.jeecg.modules.robot.entity.TbkSpread;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.jeecg.modules.robot.entity.TbkSpread;
 
 /**
  * @Description: 推广位
@@ -14,4 +11,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TbkSpreadMapper extends BaseMapper<TbkSpread> {
 
+    TbkSpread getNextFreeOne(Long pubId, Long siteId);
 }

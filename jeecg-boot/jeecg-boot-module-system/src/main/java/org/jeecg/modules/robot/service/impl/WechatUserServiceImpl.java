@@ -38,6 +38,9 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
     @Autowired
     private WecharHandler wecharHandler;
 
+    @Autowired
+    private WechatUserMapper wechatUserMapper;
+
     @Override
     public WechatUser register(String robotWxid, String wxid) {
         Objects.requireNonNull(robotWxid, "！！！机器人微信ID不能为空");
@@ -98,6 +101,22 @@ public class WechatUserServiceImpl extends ServiceImpl<WechatUserMapper, WechatU
         query.eq(WechatUser::getRobotWxid, robotWxid);
         query.eq(WechatUser::getWxid, wxid);
         return getOne(query);
+    }
+
+    @Override
+    public void setPid(WechatUser user) {
+        Objects.requireNonNull(user, "！！！要设置的用户信息不能为空");
+        Objects.requireNonNull(user.getId(), "！！！要设置的推广PID不能为空");
+        Objects.requireNonNull(user.getRobotWxid(), "！！！机器人微信ID不能为空");
+        Objects.requireNonNull(user.getWxid(), "！！！微信用户ID不能为空");
+        Objects.requireNonNull(user.getPid(), "！！！要设置的推广PID不能为空");
+
+        wechatUserMapper.updatePid(user);
+
+        WechatUser newUser = getById(user.getId());
+        // 更新缓存
+        String key = String.format(WechatConstants.USER_REDIS_FORMAT, user.getRobotWxid(), user.getWxid());
+        redisUtil.set(key, newUser, WechatConstants.USER_REDIS_TIME);
     }
 
 

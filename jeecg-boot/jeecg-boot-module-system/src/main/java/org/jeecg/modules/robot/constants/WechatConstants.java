@@ -19,4 +19,11 @@ public class WechatConstants {
     // 微信用户存放同步的间隔时间（单位：小时）
     public static final long USER_SYNC_TIME = 24 * 1;
 
+    // 推广位存放request的key
+    public static final String SPREAD = "TBK_SPREAD";
+    // 推广位存放redis的key前缀
+    public static final String SPREAD_REDIS_FORMAT = "tbk.spread.info.%s";
+    // 推广位存放redis的过期间隔时间（单位：秒）
+    public static final int SPREAD_REDIS_TIME = 60 * 60 * 1;
+
 }

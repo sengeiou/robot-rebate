@@ -1,10 +1,8 @@
 package org.jeecg.modules.robot.mapper;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.jeecg.modules.robot.entity.WechatUser;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * @Description: 微信用户
@@ -14,4 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface WechatUserMapper extends BaseMapper<WechatUser> {
 
+    void updatePid(@Param("user") WechatUser user);
 }

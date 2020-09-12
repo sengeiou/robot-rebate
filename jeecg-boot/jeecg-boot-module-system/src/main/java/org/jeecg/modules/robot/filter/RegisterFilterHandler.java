@@ -1,13 +1,11 @@
 package org.jeecg.modules.robot.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.jeecg.modules.robot.constants.WechatConstants;
 import org.jeecg.modules.robot.constants.WechatUserStateEnum;
-import org.jeecg.modules.robot.entity.WechatRobot;
-import org.jeecg.modules.robot.entity.WechatUser;
-import org.jeecg.modules.robot.entity.WxFilterResult;
-import org.jeecg.modules.robot.entity.WxReceive;
-import org.jeecg.modules.robot.filter.IWxFilterHandler;
+import org.jeecg.modules.robot.entity.*;
+import org.jeecg.modules.robot.service.ITbkSpreadService;
 import org.jeecg.modules.robot.service.IWechatRobotService;
 import org.jeecg.modules.robot.service.IWechatUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ public class RegisterFilterHandler implements IWxFilterHandler {
     @Autowired
     private IWechatUserService wxUserService;
 
+    @Autowired
+    private ITbkSpreadService spreadService;
+
     @Override
     public WxFilterResult doFilter(HttpServletRequest req, WxReceive receive) {
         if (!"100".equals(receive.getType())) {
@@ -45,7 +46,17 @@ public class RegisterFilterHandler implements IWxFilterHandler {
             return result;
         }
         WechatUser user = wxUserService.register(receive.getRobot_wxid(), receive.getFrom_wxid());
+        if(null == user){
+            result.setBreakOff(false); // 注：不中断后续执行
+            return result;
+        }
+
         req.setAttribute(WechatConstants.USER, user);
+
+        if (StringUtils.isNotEmpty(user.getPid())) {
+            TbkSpread spread = spreadService.getByPid(user.getPid()); // 查询推广位
+            req.setAttribute(WechatConstants.SPREAD, spread);
+        }
 
         // 拉黑、禁用的用户,直接不理会
         if (WechatUserStateEnum.BLACK.getCode() == user.getState() ||
